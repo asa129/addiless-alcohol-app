@@ -5,7 +5,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  say_hello:
+  project_test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello World!"
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install
+      - name: Run test
+        run: npm run test
