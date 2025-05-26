@@ -86,21 +86,10 @@ jobs:
             【解決方法】具体的な手順を1-2個
             【予防策】1つだけ
 
-      - name: Run AI answer
-        run: |
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "アドバイス"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo ""
-          AI_RESPONSE='${{ steps.ai-check.outputs.response }}' | base64 | base64 -d
-          printf '%s\n' "$AI_RESPONSE"
-          echo ""
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
       - name: Save AI response to summary
         if: always()
         run: |
           # GitHub Actionsのサマリーに出力（Web UIで確認可能）
           echo "## 分析結果" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo '${{ steps.ai-check.outputs.response }}' >> $GITHUB_STEP_SUMMARY
+          echo '${{ steps.ai-check.outputs.response }}' | base64 | base64 -d >> $GITHUB_STEP_SUMMARY
