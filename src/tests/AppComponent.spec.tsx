@@ -35,7 +35,7 @@ beforeEach(() => {
 describe("App", () => {
   it("ページタイトルが表示されている", async () => {
     render(<App />);
-    expect(await screen.findByTestId("title")).toBeInTheDocument();
+    expect(await screen.findByTestId("titl")).toBeInTheDocument();
   });
 
   it("ローディングが表示されている", async () => {
