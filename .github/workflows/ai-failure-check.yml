@@ -91,3 +91,15 @@ jobs:
           echo "$AI_RESPONSE"
           echo ""
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+      - name: Save AI response to file
+        if: ${{ steps.ai-check.outputs.response != '' }}
+        run: |
+          # AIの回答をファイルに保存（デバッグ用）
+          echo "${{ steps.ai-check.outputs.response }}" > ai-response.txt
+          echo "AIの回答をai-response.txtに保存しました"
+
+          # ファイルの内容を確認
+          echo "━━━━ AIの回答（ファイルから読み取り）━━━━"
+          cat ai-response.txt
+          echo "━━━━ 終了 ━━━━"
