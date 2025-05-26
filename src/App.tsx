@@ -27,6 +27,7 @@ function App() {
             <th>名前</th>
             <th>画像</th>
             <th>添加物あり・なし</th>
+            <th></th>
           </tr>
           {data &&
             data.map((data) => {
@@ -42,6 +43,11 @@ function App() {
                   </td>
                   <td data-testid="sake_additives">
                     {data.has_additives ? "あり" : "なし"}
+                  </td>
+                  <td>
+                    <a href="" data-testid="sake_detail">
+                      詳細
+                    </a>
                   </td>
                 </tr>
               );

@@ -6,6 +6,32 @@ jest.mock("../utils/supabaseFunctions.ts", () => ({
   getAllData: jest.fn(),
 }));
 
+// モックデータの準備
+const mockData = [
+  {
+    id: 1,
+    sake_name: "ビール",
+    image_url: "https://example.com/beer.jpg",
+    has_additives: true,
+  },
+  {
+    id: 2,
+    sake_name: "ワイン",
+    image_url: "https://example.com/wine.jpg",
+    has_additives: false,
+  },
+  {
+    id: 3,
+    sake_name: "サケ",
+    image_url: "https://example.com/sake.jpg",
+    has_additives: true,
+  },
+];
+
+beforeEach(() => {
+  (getAllData as jest.Mock).mockClear();
+});
+
 describe("App", () => {
   it("ページタイトルが表示されている", async () => {
     render(<App />);
@@ -18,28 +44,6 @@ describe("App", () => {
   });
 
   it("お酒のリストが正しく表示されている", async () => {
-    // モックデータの準備
-    const mockData = [
-      {
-        id: 1,
-        sake_name: "ビール",
-        image_url: "https://example.com/beer.jpg",
-        has_additives: true,
-      },
-      {
-        id: 2,
-        sake_name: "ワイン",
-        image_url: "https://example.com/wine.jpg",
-        has_additives: false,
-      },
-      {
-        id: 3,
-        sake_name: "サケ",
-        image_url: "https://example.com/sake.jpg",
-        has_additives: true,
-      },
-    ];
-
     // モック関数の設定
     (getAllData as jest.Mock).mockResolvedValue(mockData);
 
@@ -62,5 +66,17 @@ describe("App", () => {
     expect(additivesLows[0]).toHaveTextContent("あり");
     expect(additivesLows[1]).toHaveTextContent("なし");
     expect(additivesLows[2]).toHaveTextContent("あり");
+  });
+
+  it("詳細リンクをみてとれる", async () => {
+    // モック関数の設定
+    (getAllData as jest.Mock).mockResolvedValue(mockData);
+
+    render(<App />);
+    expect(await screen.findAllByTestId("sake_detail")).toHaveLength(3);
+    const detailLinks = await screen.findAllByTestId("sake_detail");
+    expect(detailLinks[0]).toHaveAttribute("href", "");
+    expect(detailLinks[1]).toHaveAttribute("href", "");
+    expect(detailLinks[2]).toHaveAttribute("href", "");
   });
 });
