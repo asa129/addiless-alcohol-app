@@ -1,0 +1,24 @@
+name: AI check
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "Prompt for the AI model"
+        required: true
+
+jobs:
+  inference:
+    permissions:
+      models: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Local Action
+        id: inference
+        uses: actions/ai-inference@v1
+        with:
+          prompt: "Hello!"
+
+      - name: Print Output
+        id: output
+        run: echo "${{ steps.inference.outputs.response }}"
