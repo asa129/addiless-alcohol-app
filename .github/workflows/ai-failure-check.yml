@@ -17,7 +17,44 @@ jobs:
   on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    permissions:
+      actions: read
+      contents: read
+      models: read
     steps:
       - name: failure
         run: |
           echo "trigger build workflow failed"
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: get error info
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "::error::ワークフロー失敗"
+          echo "branch: ${{ github.event.workflow_run.head_branch }}"
+
+      - name: Run AI check
+        uses: actions/ai-inference@v1
+        with:
+          model: "openai/gpt-4o"
+          prompt: |
+            あなたは、エラー解決のプロです。初心者に向けてわかりやすくなぜエラーになったのか、どうすればエラーを解決できるかを教えてください。
+            分かりやすく日本語で説明してください。
+            エラーの内容は以下です。
+
+            **失敗したワークフロー:**
+            - 名前: Test and Deploy
+            - 内容: Viteプロジェクトのテスト → ビルド → Firebaseデプロイ
+            - 使用技術: Vite, Supabase, Firebase
+            - ブランチ: ${{ github.event.workflow_run.head_branch }}
+
+      - name: Run AI answer
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "アドバイス"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "${{ steps.ai-help.outputs.response }}"
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
