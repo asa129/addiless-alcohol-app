@@ -17,7 +17,8 @@ jobs:
         id: inference
         uses: actions/ai-inference@v1
         with:
-          prompt: "Hello!"
+          prompt: "${{ github.event.inputs.prompt }}"
+          model: "openai/gpt-4.1"
 
       - name: Print Output
         id: output
