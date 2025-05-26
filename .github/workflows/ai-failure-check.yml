@@ -28,13 +28,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: get error info
+        id: get-error
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "::error::ワークフロー失敗"
           echo "branch: ${{ github.event.workflow_run.head_branch }}"
+          # ワークフローの実行IDを取得
+          RUN_ID=${{ github.event.workflow_run.id }}
+          echo "RUN_ID: $RUN_ID"
+
+          # ジョブの一覧を取得
+          JOBS=$(gh api repos/${{ github.repository }}/actions/runs/${RUN_ID}/jobs --jq '.jobs')
+
+          # 失敗したジョブのログを取得
+          echo "FAILED_LOGS<<EOF" >> $GITHUB_ENV
+
+          # ワークフロー情報を環境変数に保存
+          echo "WORKFLOW_NAME=${{ github.event.workflow_run.name }}" >> $GITHUB_ENV
+          echo "BRANCH_NAME=${{ github.event.workflow_run.head_branch }}" >> $GITHUB_ENV
+          echo "COMMIT_SHA=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_ENV
 
       - name: Run AI check
+        id: ai-check
         uses: actions/ai-inference@v1
         with:
           model: "openai/gpt-4o"
@@ -44,10 +60,15 @@ jobs:
             エラーの内容は以下です。
 
             **失敗したワークフロー:**
-            - 名前: Test and Deploy
-            - 内容: Viteプロジェクトのテスト → ビルド → Firebaseデプロイ
+            - ワークフロー名: ${{ env.WORKFLOW_NAME }}
+            - ブランチ: ${{ env.BRANCH_NAME }}
+            - コミットSHA: ${{ env.COMMIT_SHA }}
             - 使用技術: Vite, Supabase, Firebase
-            - ブランチ: ${{ github.event.workflow_run.head_branch }}
+
+            **エラーログ:**
+            ```
+            ${{ env.FAILED_LOGS }}
+            ```
 
       - name: Run AI answer
         run: |
@@ -55,6 +76,6 @@ jobs:
           echo "アドバイス"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo ""
-          echo "${{ steps.ai-help.outputs.response }}"
+          echo "${{ steps.ai-check.outputs.response }}"
           echo ""
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
