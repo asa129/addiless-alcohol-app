@@ -88,18 +88,14 @@ jobs:
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo ""
           AI_RESPONSE='${{ steps.ai-check.outputs.response }}'
-          echo "$AI_RESPONSE"
+          printf '%s\n' "$AI_RESPONSE"
           echo ""
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-      - name: Save AI response to file
-        if: ${{ steps.ai-check.outputs.response != '' }}
+      - name: Save AI response to summary
+        if: always()
         run: |
-          # AIの回答をファイルに保存（デバッグ用）
-          echo "${{ steps.ai-check.outputs.response }}" > ai-response.txt
-          echo "AIの回答をai-response.txtに保存しました"
-
-          # ファイルの内容を確認
-          echo "━━━━ AIの回答（ファイルから読み取り）━━━━"
-          cat ai-response.txt
-          echo "━━━━ 終了 ━━━━"
+          # GitHub Actionsのサマリーに出力（Web UIで確認可能）
+          echo "## 分析結果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '${{ steps.ai-check.outputs.response }}' >> $GITHUB_STEP_SUMMARY
