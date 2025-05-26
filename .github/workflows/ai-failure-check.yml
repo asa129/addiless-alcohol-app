@@ -87,6 +87,7 @@ jobs:
           echo "アドバイス"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo ""
-          echo "${{ steps.ai-check.outputs.response }}"
+          AI_RESPONSE='${{ steps.ai-check.outputs.response }}'
+          echo "$AI_RESPONSE"
           echo ""
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
