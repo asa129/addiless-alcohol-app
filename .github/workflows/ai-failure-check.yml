@@ -1,0 +1,23 @@
+name: AI Failure check
+
+on:
+  workflow_run:
+    workflows: "Test and Deploy"
+    types:
+      - completed
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: success
+        run: |
+          echo "trigger build workflow success"
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: failure
+        run: |
+          echo "trigger build workflow failed"
