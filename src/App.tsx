@@ -1,15 +1,25 @@
 import { getAllData } from "./utils/supabaseFunctions.ts";
 import { useEffect, useState } from "react";
 import type { Alcohols } from "./domain/Alcohols.ts";
+import { Modal } from "./components/Modal.tsx";
 
 function App() {
   const [data, setData] = useState<Partial<Alcohols>[]>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const getData = async () => {
     const data = await getAllData();
     setData(data);
     setIsLoading(false);
   };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -45,15 +55,19 @@ function App() {
                     {data.has_additives ? "あり" : "なし"}
                   </td>
                   <td>
-                    <a href="" data-testid="sake_detail">
+                    <button
+                      onClick={() => handleOpenModal()}
+                      data-testid="sake_detail"
+                    >
                       詳細
-                    </a>
+                    </button>
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </table>
+      {isModalOpen && <Modal isOpen={isModalOpen} onClose={handleCloseModal} />}
     </>
   );
 }

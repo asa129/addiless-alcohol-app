@@ -35,7 +35,7 @@ beforeEach(() => {
 describe("App", () => {
   it("ページタイトルが表示されている", async () => {
     render(<App />);
-    expect(await screen.findByTestId("titl")).toBeInTheDocument();
+    expect(await screen.findByTestId("title")).toBeInTheDocument();
   });
 
   it("ローディングが表示されている", async () => {
@@ -68,15 +68,15 @@ describe("App", () => {
     expect(additivesLows[2]).toHaveTextContent("あり");
   });
 
-  it("詳細リンクをみてとれる", async () => {
+  it("詳細ボタンをみてとれる", async () => {
     // モック関数の設定
     (getAllData as jest.Mock).mockResolvedValue(mockData);
 
     render(<App />);
     expect(await screen.findAllByTestId("sake_detail")).toHaveLength(3);
-    const detailLinks = await screen.findAllByTestId("sake_detail");
-    expect(detailLinks[0]).toHaveAttribute("href", "");
-    expect(detailLinks[1]).toHaveAttribute("href", "");
-    expect(detailLinks[2]).toHaveAttribute("href", "");
+    const detailButtons = await screen.findAllByTestId("sake_detail");
+    expect(detailButtons[0]).toHaveTextContent("詳細");
+    expect(detailButtons[1]).toHaveTextContent("詳細");
+    expect(detailButtons[2]).toHaveTextContent("詳細");
   });
 });
