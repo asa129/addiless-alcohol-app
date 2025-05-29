@@ -7,13 +7,15 @@ function App() {
   const [data, setData] = useState<Partial<Alcohols>[]>();
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedData, setSelectedData] = useState<Partial<Alcohols>>();
   const getData = async () => {
     const data = await getAllData();
     setData(data);
     setIsLoading(false);
   };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (data: Partial<Alcohols>) => {
+    setSelectedData(data);
     setIsModalOpen(true);
   };
   const handleCloseModal = () => {
@@ -56,7 +58,7 @@ function App() {
                   </td>
                   <td>
                     <button
-                      onClick={() => handleOpenModal()}
+                      onClick={() => handleOpenModal(data)}
                       data-testid="sake_detail"
                     >
                       詳細
@@ -67,7 +69,13 @@ function App() {
             })}
         </tbody>
       </table>
-      {isModalOpen && <Modal isOpen={isModalOpen} onClose={handleCloseModal} />}
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          selectedData={selectedData!}
+        />
+      )}
     </>
   );
 }

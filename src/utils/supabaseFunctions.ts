@@ -2,7 +2,11 @@ import { supabase } from "./supabase";
 import { Alcohols } from "../domain/Alcohols.ts";
 
 export const getAllData: () => Promise<Partial<Alcohols>[]> = async () => {
-  const { data, error } = await supabase.from("alcohols").select();
+  const { data, error } = await supabase
+    .from("alcohols")
+    .select(
+      "* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)"
+    );
 
   if (error) {
     throw new Error(error.message);
@@ -21,7 +25,9 @@ export const getAllData: () => Promise<Partial<Alcohols>[]> = async () => {
       data.has_additives,
       data.is_active,
       data.created_at,
-      data.updated_at
+      data.updated_at,
+      { genre_name: data.alcohol_genres?.genre_name },
+      { manufacturer_name: data.manufacturers?.manufacturer_name }
     );
   });
 

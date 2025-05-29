@@ -11,6 +11,12 @@ export class Alcohols {
     public has_additives: boolean | undefined,
     public is_active: boolean | undefined,
     public created_at: string | undefined,
-    public updated_at: string | undefined
+    public updated_at: string | undefined,
+    public alcohol_genres: {
+      genre_name: string | undefined;
+    },
+    public manufacturers: {
+      manufacturer_name: string | undefined;
+    }
   ) {}
 }
