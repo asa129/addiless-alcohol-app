@@ -32,6 +32,13 @@ function App() {
   return (
     <>
       <h1 data-testid="title">成分表示でお酒を検索</h1>
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          selectedData={selectedData!}
+        />
+      )}
       <table>
         <thead></thead>
         <tbody>
@@ -69,13 +76,6 @@ function App() {
             })}
         </tbody>
       </table>
-      {isModalOpen && (
-        <Modal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          selectedData={selectedData!}
-        />
-      )}
     </>
   );
 }

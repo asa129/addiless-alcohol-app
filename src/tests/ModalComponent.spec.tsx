@@ -90,9 +90,6 @@ describe("Modal", () => {
     expect(await screen.findByTestId("modal_has_additives")).toHaveTextContent(
       "あり"
     );
-    expect(await screen.findByTestId("modal_description")).toHaveTextContent(
-      "ビールです"
-    );
     expect(
       await screen.findByTestId("modal_ingredients_text")
     ).toHaveTextContent("麦芽、水、酵母");

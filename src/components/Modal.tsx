@@ -13,20 +13,39 @@ export const Modal = (props: {
       <button onClick={onClose} data-testid="modal_close">
         閉じる
       </button>
-      <p data-testid="modal_sake_name">{selectedData.sake_name}</p>
-      <p data-testid="modal_alcohol_genres">
-        {selectedData.alcohol_genres?.genre_name}
-      </p>
-      <p data-testid="modal_manufacturers">
-        {selectedData.manufacturers?.manufacturer_name}
-      </p>
-      <p data-testid="modal_has_additives">
-        {selectedData.has_additives ? "添加物あり" : "添加物なし"}
-      </p>
-      <p data-testid="modal_description">{selectedData.description}</p>
-      <p data-testid="modal_ingredients_text">
-        {selectedData.ingredients_text}
-      </p>
+      <table>
+        <tbody>
+          <tr>
+            <td>名前</td>
+            <td data-testid="modal_sake_name">{selectedData.sake_name}</td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td data-testid="modal_alcohol_genres">
+              {selectedData.alcohol_genres?.genre_name}
+            </td>
+          </tr>
+          <tr>
+            <td>メーカー</td>
+            <td data-testid="modal_manufacturers">
+              {selectedData.manufacturers?.manufacturer_name}
+            </td>
+          </tr>
+          <tr>
+            <td>添加物有無</td>
+            <td data-testid="modal_has_additives">
+              {selectedData.has_additives ? "添加物あり" : "添加物なし"}
+            </td>
+          </tr>
+          <tr>
+            <td>原材料/添加物</td>
+            <td data-testid="modal_ingredients_text">
+              {selectedData.description}
+              {selectedData.ingredients_text}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
