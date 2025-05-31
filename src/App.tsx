@@ -22,6 +22,10 @@ function App() {
     setIsModalOpen(false);
   };
 
+  const additivesSearch = () => {
+    alert("検索できたよ");
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -32,6 +36,34 @@ function App() {
   return (
     <>
       <h1 data-testid="title">成分表示でお酒を検索</h1>
+      <div>
+        <div>
+          <label htmlFor="additives">添加物</label>
+          <select data-testid="select" id="additives">
+            <option value="0">添加物を選んでください</option>
+            <option value="1">人工甘味料</option>
+            <option value="2">保存料</option>
+            <option value="3">着色料</option>
+            <option value="4">発色剤</option>
+            <option value="5">pH調整剤</option>
+            <option value="6">香料</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="additivesSearch">添加物で検索</label>
+          <input type="text" id="additivesSearch" />
+        </div>
+        <div>
+          <label>添加物あり/なし</label>
+          <input type="radio" name="have_additives" value="1" />
+          <label>あり</label>
+          <input type="radio" name="have_additives" value="0" defaultChecked />
+          <label>なし</label>
+        </div>
+        <div>
+          <button onClick={additivesSearch}>検索</button>
+        </div>
+      </div>
       {isModalOpen && (
         <Modal
           isOpen={isModalOpen}
