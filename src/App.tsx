@@ -1,4 +1,4 @@
-import { getAllData } from "./utils/supabaseFunctions.ts";
+import { getAllData, searchData } from "./utils/supabaseFunctions.ts";
 import { useEffect, useState } from "react";
 import type { Alcohols } from "./domain/Alcohols.ts";
 import { Modal } from "./components/Modal.tsx";
@@ -22,8 +22,9 @@ function App() {
     setIsModalOpen(false);
   };
 
-  const additivesSearch = () => {
-    alert("検索できたよ");
+  const additivesSearch = async () => {
+    const searchDatas: Partial<Alcohols>[] = await searchData();
+    setData(searchDatas);
   };
 
   useEffect(() => {
@@ -39,14 +40,14 @@ function App() {
       <div>
         <div>
           <label htmlFor="additives">添加物</label>
-          <select data-testid="select" id="additives">
+          <select data-testid="select" id="additives" name="additives">
             <option value="0">添加物を選んでください</option>
-            <option value="1">人工甘味料</option>
+            <option value="甘味料">人工甘味料</option>
             <option value="2">保存料</option>
             <option value="3">着色料</option>
             <option value="4">発色剤</option>
             <option value="5">pH調整剤</option>
-            <option value="6">香料</option>
+            <option value="香料">香料</option>
           </select>
         </div>
         <div>
