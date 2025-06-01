@@ -2,6 +2,8 @@ import { getAllData, searchData } from "./utils/supabaseFunctions.ts";
 import { useEffect, useState } from "react";
 import type { Alcohols } from "./domain/Alcohols.ts";
 import { Modal } from "./components/Modal.tsx";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { AdditivesSearch } from "./domain/AdditivesSearch.ts";
 
 function App() {
   const [data, setData] = useState<Partial<Alcohols>[]>();
@@ -22,9 +24,18 @@ function App() {
     setIsModalOpen(false);
   };
 
-  const additivesSearch = async () => {
-    const searchDatas: Partial<Alcohols>[] = await searchData();
+  const aditivesSearch = async (formData: AdditivesSearch) => {
+    const searchDatas: Partial<Alcohols>[] = await searchData(formData);
     setData(searchDatas);
+  };
+
+  const { handleSubmit, register, setValue } = useForm<AdditivesSearch>();
+  const onSubmit: SubmitHandler<AdditivesSearch> = (formData) => {
+    if (formData.have_additives === "0") {
+      formData.additives = "";
+      formData.additivesWord = "";
+    }
+    aditivesSearch(formData);
   };
 
   useEffect(() => {
@@ -38,32 +49,57 @@ function App() {
     <>
       <h1 data-testid="title">成分表示でお酒を検索</h1>
       <div>
-        <div>
-          <label htmlFor="additives">添加物</label>
-          <select data-testid="select" id="additives" name="additives">
-            <option value="0">添加物を選んでください</option>
-            <option value="甘味料">人工甘味料</option>
-            <option value="2">保存料</option>
-            <option value="3">着色料</option>
-            <option value="4">発色剤</option>
-            <option value="5">pH調整剤</option>
-            <option value="香料">香料</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="additivesSearch">添加物で検索</label>
-          <input type="text" id="additivesSearch" />
-        </div>
-        <div>
-          <label>添加物あり/なし</label>
-          <input type="radio" name="have_additives" value="1" />
-          <label>あり</label>
-          <input type="radio" name="have_additives" value="0" defaultChecked />
-          <label>なし</label>
-        </div>
-        <div>
-          <button onClick={additivesSearch}>検索</button>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label htmlFor="additives">添加物</label>
+            <select
+              data-testid="select"
+              id="additives"
+              {...register("additives")}
+              onChange={() => {
+                setValue("have_additives", "1");
+              }}
+            >
+              <option value="">添加物を選んでください</option>
+              <option value="甘味料">人工甘味料</option>
+              <option value="2">保存料</option>
+              <option value="3">着色料</option>
+              <option value="4">発色剤</option>
+              <option value="5">pH調整剤</option>
+              <option value="香料">香料</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="additivesWord">添加物で検索</label>
+            <input
+              type="text"
+              id="additivesWord"
+              {...register("additivesWord")}
+              onChange={() => {
+                setValue("have_additives", "1");
+              }}
+            />
+          </div>
+          <div>
+            <label>添加物あり/なし</label>
+            <input type="radio" {...register("have_additives")} value="1" />
+            <label>あり</label>
+            <input
+              type="radio"
+              {...register("have_additives")}
+              value="0"
+              onClick={() => {
+                setValue("additives", "");
+                setValue("additivesWord", "");
+              }}
+              defaultChecked
+            />
+            <label>なし</label>
+          </div>
+          <div>
+            <input type="submit" value="検索" />
+          </div>
+        </form>
       </div>
       {isModalOpen && (
         <Modal

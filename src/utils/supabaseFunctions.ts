@@ -1,5 +1,6 @@
 import { supabase } from "./supabase";
 import { Alcohols } from "../domain/Alcohols.ts";
+import type { AdditivesSearch } from "../domain/AdditivesSearch.ts";
 
 export const getAllData: () => Promise<Partial<Alcohols>[]> = async () => {
   const { data, error } = await supabase
@@ -34,11 +35,16 @@ export const getAllData: () => Promise<Partial<Alcohols>[]> = async () => {
   return alcohols;
 };
 
-export const searchData: () => Promise<Partial<Alcohols>[]> = async () => {
+export const searchData: (
+  props: AdditivesSearch
+) => Promise<Partial<Alcohols>[]> = async (props) => {
+  const { additives, additivesWord, have_additives } = props;
   const { data, error } = await supabase
     .from("alcohols")
     .select("* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)")
-    .like("ingredients_text", "%香料%");
+    .like(`ingredients_text`, `%${additives}%`)
+    .like(`ingredients_text`, `%${additivesWord}%`)
+    .eq(`has_additives`, `${have_additives === "1"}`);
 
   if (error) {
     throw new Error(error.message);
