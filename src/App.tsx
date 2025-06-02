@@ -82,8 +82,13 @@ function App() {
           </div>
           <div>
             <label>添加物あり/なし</label>
-            <input type="radio" {...register("have_additives")} value="1" />
-            <label>あり</label>
+            <input
+              type="radio"
+              {...register("have_additives")}
+              value="1"
+              id="have_additives"
+            />
+            <label htmlFor="have_additives">あり</label>
             <input
               type="radio"
               {...register("have_additives")}
@@ -93,8 +98,9 @@ function App() {
                 setValue("additivesWord", "");
               }}
               defaultChecked
+              id="not_have_additives"
             />
-            <label>なし</label>
+            <label htmlFor="not_have_additives">なし</label>
           </div>
           <div>
             <input type="submit" value="検索" />
