@@ -53,7 +53,7 @@ function App() {
           <div>
             <label htmlFor="additives">添加物</label>
             <select
-              data-testid="select"
+              data-testid="select_additives"
               id="additives"
               {...register("additives")}
               onChange={() => {
@@ -78,6 +78,7 @@ function App() {
               onChange={() => {
                 setValue("have_additives", "1");
               }}
+              data-testid="additives_word"
             />
           </div>
           <div>
@@ -87,6 +88,7 @@ function App() {
               {...register("have_additives")}
               value="1"
               id="have_additives"
+              data-testid="have_additives"
             />
             <label htmlFor="have_additives">あり</label>
             <input
@@ -99,11 +101,12 @@ function App() {
               }}
               defaultChecked
               id="not_have_additives"
+              data-testid="not_have_additives"
             />
             <label htmlFor="not_have_additives">なし</label>
           </div>
           <div>
-            <input type="submit" value="検索" />
+            <input type="submit" value="検索" data-testid="search_button" />
           </div>
         </form>
       </div>
