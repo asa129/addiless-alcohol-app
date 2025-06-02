@@ -28,7 +28,8 @@ export const getAllData: () => Promise<Partial<Alcohols>[]> = async () => {
       data.created_at,
       data.updated_at,
       { genre_name: data.alcohol_genres?.genre_name },
-      { manufacturer_name: data.manufacturers?.manufacturer_name }
+      { manufacturer_name: data.manufacturers?.manufacturer_name },
+      data.additives_text
     );
   });
 
@@ -42,8 +43,8 @@ export const searchData: (
   const { data, error } = await supabase
     .from("alcohols")
     .select("* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)")
-    .like(`ingredients_text`, `%${additives}%`)
-    .like(`ingredients_text`, `%${additivesWord}%`)
+    .like(`additives_text`, `%${additives}%`)
+    .like(`additives_text`, `%${additivesWord}%`)
     .eq(`has_additives`, `${have_additives === "1"}`);
 
   if (error) {
@@ -65,7 +66,8 @@ export const searchData: (
       data.created_at,
       data.updated_at,
       { genre_name: data.alcohol_genres?.genre_name },
-      { manufacturer_name: data.manufacturers?.manufacturer_name }
+      { manufacturer_name: data.manufacturers?.manufacturer_name },
+      data.additives_text
     );
   });
 

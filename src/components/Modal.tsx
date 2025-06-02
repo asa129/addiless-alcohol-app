@@ -38,10 +38,16 @@ export const Modal = (props: {
             </td>
           </tr>
           <tr>
-            <td>原材料/添加物</td>
+            <td>原材料</td>
             <td data-testid="modal_ingredients_text">
               {selectedData.description}
               {selectedData.ingredients_text}
+            </td>
+          </tr>
+          <tr>
+            <td>添加物</td>
+            <td data-testid="modal_additives_text">
+              {selectedData.additives_text}
             </td>
           </tr>
         </tbody>

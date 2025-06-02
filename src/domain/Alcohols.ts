@@ -17,6 +17,7 @@ export class Alcohols {
     },
     public manufacturers: {
       manufacturer_name: string | undefined;
-    }
+    },
+    public additives_text: string | undefined
   ) {}
 }
