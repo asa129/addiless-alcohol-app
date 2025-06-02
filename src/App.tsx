@@ -62,10 +62,10 @@ function App() {
             >
               <option value="">添加物を選んでください</option>
               <option value="甘味料">人工甘味料</option>
-              <option value="2">保存料</option>
-              <option value="3">着色料</option>
-              <option value="4">発色剤</option>
-              <option value="5">pH調整剤</option>
+              <option value="酸味料">酸味料</option>
+              <option value="着色料">着色料</option>
+              <option value="発色剤">発色剤</option>
+              <option value="酸化防止剤">酸化防止剤</option>
               <option value="香料">香料</option>
             </select>
           </div>
@@ -108,43 +108,49 @@ function App() {
           selectedData={selectedData!}
         />
       )}
-      <table>
-        <thead></thead>
-        <tbody>
-          <tr>
-            <th>名前</th>
-            <th>画像</th>
-            <th>添加物あり・なし</th>
-            <th></th>
-          </tr>
-          {data &&
-            data.map((data) => {
-              return (
-                <tr key={data.id}>
-                  <td data-testid="sake_name">{data.sake_name}</td>
-                  <td>
-                    <img
-                      src={data.image_url!}
-                      alt={data.sake_name}
-                      data-testid="sake_image"
-                    />
-                  </td>
-                  <td data-testid="sake_additives">
-                    {data.has_additives ? "あり" : "なし"}
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleOpenModal(data)}
-                      data-testid="sake_detail"
-                    >
-                      詳細
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      {data && data.length === 0 ? (
+        <div>
+          <p>検索結果ないよ</p>
+        </div>
+      ) : (
+        <table>
+          <thead></thead>
+          <tbody>
+            <tr>
+              <th>名前</th>
+              <th>画像</th>
+              <th>添加物あり・なし</th>
+              <th></th>
+            </tr>
+            {data &&
+              data.map((data) => {
+                return (
+                  <tr key={data.id}>
+                    <td data-testid="sake_name">{data.sake_name}</td>
+                    <td>
+                      <img
+                        src={data.image_url!}
+                        alt={data.sake_name}
+                        data-testid="sake_image"
+                      />
+                    </td>
+                    <td data-testid="sake_additives">
+                      {data.has_additives ? "あり" : "なし"}
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleOpenModal(data)}
+                        data-testid="sake_detail"
+                      >
+                        詳細
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      )}
     </>
   );
 }
