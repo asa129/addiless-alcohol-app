@@ -47,7 +47,9 @@ function App() {
   }
   return (
     <>
-      <h1 data-testid="title">成分表示でお酒を検索</h1>
+      <h1 data-testid="title" onClick={() => getData()}>
+        成分表示でお酒を検索
+      </h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
