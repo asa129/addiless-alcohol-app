@@ -25,7 +25,7 @@ function App() {
   };
 
   const aditivesSearch = async (formData: AdditivesSearch) => {
-    const searchDatas: Partial<Alcohols>[] = await searchData(formData);
+    const searchDatas = await searchData(formData);
     setData(searchDatas);
   };
 
