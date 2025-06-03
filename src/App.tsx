@@ -1,4 +1,8 @@
-import { getAllData, searchData } from "./utils/supabaseFunctions.ts";
+import {
+  getAllData,
+  getDataByAlcohols,
+  searchData,
+} from "./utils/supabaseFunctions.ts";
 import { useEffect, useState } from "react";
 import type { Alcohols } from "./domain/Alcohols.ts";
 import { Modal } from "./components/Modal.tsx";
@@ -30,12 +34,17 @@ function App() {
   };
 
   const { handleSubmit, register, setValue } = useForm<AdditivesSearch>();
-  const onSubmit: SubmitHandler<AdditivesSearch> = (formData) => {
+  const onAdditivesSubmit: SubmitHandler<AdditivesSearch> = (formData) => {
     if (formData.have_additives === "0") {
       formData.additives = "";
       formData.additivesWord = "";
     }
     aditivesSearch(formData);
+  };
+
+  const onAlcoholsSubmit: SubmitHandler<AdditivesSearch> = async (formData) => {
+    const searchByAlcoholsData = await getDataByAlcohols(formData);
+    setData(searchByAlcoholsData);
   };
 
   useEffect(() => {
@@ -51,7 +60,7 @@ function App() {
         成分表示でお酒を検索
       </h1>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onAdditivesSubmit)}>
           <div>
             <label htmlFor="additives">添加物</label>
             <select
@@ -106,6 +115,30 @@ function App() {
               data-testid="not_have_additives"
             />
             <label htmlFor="not_have_additives">なし</label>
+          </div>
+          <div>
+            <input type="submit" value="検索" data-testid="search_button" />
+          </div>
+        </form>
+        <form onSubmit={handleSubmit(onAlcoholsSubmit)}>
+          <div>
+            <label htmlFor="sake_name">お酒の名前で検索</label>
+            <input type="text" id="sake_name" {...register("sake_name")} />
+          </div>
+          <div>
+            <label htmlFor="genre_id">お酒のジャンル</label>
+            <input type="checkbox" value="1" id="beer" />
+            <label htmlFor="beer">ビール</label>
+            <input type="checkbox" value="2" id="chuhai" />
+            <label htmlFor="chuhai">チューハイ</label>
+            <input type="checkbox" value="3" id="low_malt_beer" />
+            <label htmlFor="low_malt_beer">発泡酒</label>
+            <input type="checkbox" value="4" id="cocktail" />
+            <label htmlFor="cocktail">カクテル</label>
+            <input type="checkbox" value="5" id="sake" />
+            <label htmlFor="sake">日本酒</label>
+            <input type="checkbox" value="6" id="wine" />
+            <label htmlFor="wine">ワイン</label>
           </div>
           <div>
             <input type="submit" value="検索" data-testid="search_button" />
