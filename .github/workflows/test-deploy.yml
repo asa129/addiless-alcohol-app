@@ -64,6 +64,6 @@ jobs:
       - name: Deploy to Firebase
         uses: joinflux/firebase-tools@v9.16.0
         with:
-          args: deploy --project=business-card-app-af4ee --only hosting
+          args: deploy --project=addiless-alcohol-app --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
