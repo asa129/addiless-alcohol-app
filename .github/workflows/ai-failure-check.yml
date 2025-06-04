@@ -34,14 +34,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "::error::ワークフロー失敗"
-          echo "branch: ${{ github.event.workflow_run.head_branch }}"
 
-          # ワークフローの実行IDを取得
+
+        # ワークフローの実行IDを取得
           RUN_ID=${{ github.event.workflow_run.id }}
           echo "RUN_ID: $RUN_ID"
-
-          # ワークフロー情報を環境変数に保存
+        # ワークフロー情報を環境変数に保存
           echo "WORKFLOW_NAME=${{ github.event.workflow_run.name }}" >> $GITHUB_ENV
           echo "BRANCH_NAME=${{ github.event.workflow_run.head_branch }}" >> $GITHUB_ENV
           echo "COMMIT_SHA=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_ENV
@@ -53,9 +51,19 @@ jobs:
           echo "FAILED_LOGS<<EOF" >> $GITHUB_ENV
 
           for job in $(echo "$JOBS" | jq -r '.[] | select(.conclusion == "failure") | .id'); do
-            echo "=== Job ID: $job ===" >> $GITHUB_ENV
-            gh api repos/${{ github.repository }}/actions/jobs/${job}/logs >> $GITHUB_ENV 2>&1 || echo "ログの取得に失敗しました" >> $GITHUB_ENV
+            # ジョブ名を取得
+            JOB_NAME=$(echo "$JOBS" | jq -r --arg id "$job" '.[] | select(.id == ($id | tonumber)) | .name')
+            echo "失敗したジョブ: $JOB_NAME" >> $GITHUB_ENV
             echo "" >> $GITHUB_ENV
+            
+            # エラーの部分だけを取得（最大20行）
+            echo "エラー内容:" >> $GITHUB_ENV
+            gh api repos/${{ github.repository }}/actions/jobs/${job}/logs 2>&1 | \
+              grep -i "error\|fail\|npm ERR" | \
+              head -20 >> $GITHUB_ENV || echo "ログを取得できませんでした" >> $GITHUB_ENV
+            
+            echo "" >> $GITHUB_ENV
+            echo "---" >> $GITHUB_ENV
           done
 
           echo "EOF" >> $GITHUB_ENV
