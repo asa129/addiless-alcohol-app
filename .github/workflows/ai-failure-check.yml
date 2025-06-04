@@ -34,8 +34,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-
-
         # ワークフローの実行IDを取得
           RUN_ID=${{ github.event.workflow_run.id }}
           echo "RUN_ID: $RUN_ID"
