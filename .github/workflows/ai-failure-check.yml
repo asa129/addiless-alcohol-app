@@ -57,8 +57,8 @@ jobs:
             # エラーの部分だけを取得（最大20行）
             echo "エラー内容:" >> $GITHUB_ENV
             gh api repos/${{ github.repository }}/actions/jobs/${job}/logs 2>&1 | \
-              grep -i "error\|fail\|npm ERR" | \
-              head -20 >> $GITHUB_ENV || echo "ログを取得できませんでした" >> $GITHUB_ENV
+              grep -B 2 -A 5 -i "error\|fail\|Found multiple\|Expected\|Received" | \
+              head -30 >> $GITHUB_ENV || echo "ログを取得できませんでした" >> $GITHUB_ENV
             
             echo "" >> $GITHUB_ENV
             echo "---" >> $GITHUB_ENV
