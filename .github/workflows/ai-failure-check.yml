@@ -34,10 +34,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-        # ワークフローの実行IDを取得
+          # ワークフローの実行IDを取得
           RUN_ID=${{ github.event.workflow_run.id }}
           echo "RUN_ID: $RUN_ID"
-        # ワークフロー情報を環境変数に保存
+          # ワークフロー情報を環境変数に保存
           echo "WORKFLOW_NAME=${{ github.event.workflow_run.name }}" >> $GITHUB_ENV
           echo "BRANCH_NAME=${{ github.event.workflow_run.head_branch }}" >> $GITHUB_ENV
           echo "COMMIT_SHA=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_ENV
