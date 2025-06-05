@@ -14,6 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedData, setSelectedData] = useState<Partial<Alcohols>>();
+  const [genreId, setGenreId] = useState<string[]>([]);
   const getData = async () => {
     const data = await getAllData();
     setData(data);
@@ -47,9 +48,18 @@ function App() {
     setData(searchByAlcoholsData);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setGenreId([...genreId, e.target.value]);
+    } else {
+      setGenreId(genreId.filter((id) => id !== e.target.value));
+    }
+  };
+
   useEffect(() => {
     getData();
   }, []);
+  genreId.map((id) => console.log(id));
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -126,24 +136,66 @@ function App() {
             <input type="text" id="sake_name" {...register("sake_name")} />
           </div>
           <div>
+            <input type="submit" value="検索" data-testid="search_button2" />
+          </div>
+        </form>
+        <div>
+          <div>
             <label htmlFor="genre_id">お酒のジャンル</label>
-            <input type="checkbox" value="1" id="beer" />
+            <input
+              type="checkbox"
+              value="1"
+              id="beer"
+              onChange={handleChange}
+            />
             <label htmlFor="beer">ビール</label>
-            <input type="checkbox" value="2" id="chuhai" />
+            <input
+              type="checkbox"
+              value="2"
+              id="chuhai"
+              onChange={handleChange}
+            />
             <label htmlFor="chuhai">チューハイ</label>
-            <input type="checkbox" value="3" id="low_malt_beer" />
+            <input
+              type="checkbox"
+              value="3"
+              id="low_malt_beer"
+              onChange={handleChange}
+            />
             <label htmlFor="low_malt_beer">発泡酒</label>
-            <input type="checkbox" value="4" id="cocktail" />
+            <input
+              type="checkbox"
+              value="4"
+              id="cocktail"
+              onChange={handleChange}
+            />
             <label htmlFor="cocktail">カクテル</label>
-            <input type="checkbox" value="5" id="sake" />
+            <input
+              type="checkbox"
+              value="5"
+              id="sake"
+              onChange={handleChange}
+            />
             <label htmlFor="sake">日本酒</label>
-            <input type="checkbox" value="6" id="wine" />
+            <input
+              type="checkbox"
+              value="6"
+              id="wine"
+              onChange={handleChange}
+            />
             <label htmlFor="wine">ワイン</label>
           </div>
           <div>
-            <input type="submit" value="検索" data-testid="search_button" />
+            <label htmlFor="">メーカー</label>
+            <select>
+              <option value="">メーカーを選んでください</option>
+              <option value="1">サントリー</option>
+              <option value="2">アサヒ</option>
+              <option value="3">キリン</option>
+              <option value="4">サッポロ</option>
+            </select>
           </div>
-        </form>
+        </div>
       </div>
       {isModalOpen && (
         <Modal
