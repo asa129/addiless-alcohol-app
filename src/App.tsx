@@ -1,6 +1,7 @@
 import {
   getAllData,
   getDataByAlcohols,
+  getDataByGenres,
   searchData,
 } from "./utils/supabaseFunctions.ts";
 import { useEffect, useState } from "react";
@@ -55,6 +56,14 @@ function App() {
       setGenreId(genreId.filter((id) => id !== e.target.value));
     }
   };
+
+  useEffect(() => {
+    const fetchDataByGenres = async () => {
+      const searchByGenresData = await getDataByGenres(genreId);
+      setData(searchByGenresData);
+    };
+    fetchDataByGenres();
+  }, [genreId]);
 
   useEffect(() => {
     getData();
