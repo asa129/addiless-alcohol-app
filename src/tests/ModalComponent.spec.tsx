@@ -57,6 +57,7 @@ const mockData = [
 
 beforeEach(() => {
   (getAllData as jest.Mock).mockClear();
+  (getDataByGenres as jest.Mock).mockClear();
 });
 
 describe("Modal", () => {
