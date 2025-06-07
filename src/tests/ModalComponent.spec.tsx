@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import App from "../App";
 import userEvent from "@testing-library/user-event";
-import { getAllData } from "../utils/supabaseFunctions";
+import { getAllData, getDataByGenres } from "../utils/supabaseFunctions";
 
 jest.mock("../utils/supabaseFunctions.ts", () => ({
   getAllData: jest.fn(),
+  getDataByGenres: jest.fn(),
 }));
 
 // モックデータの準備

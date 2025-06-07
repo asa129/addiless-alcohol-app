@@ -58,6 +58,9 @@ function App() {
   };
 
   useEffect(() => {
+    if (genreId.length === 0) {
+      getData();
+    }
     const fetchDataByGenres = async () => {
       const searchByGenresData = await getDataByGenres(genreId);
       setData(searchByGenresData);
@@ -153,13 +156,6 @@ function App() {
             <label htmlFor="genre_id">お酒のジャンル</label>
             <input
               type="checkbox"
-              value="1"
-              id="beer"
-              onChange={handleChange}
-            />
-            <label htmlFor="beer">ビール</label>
-            <input
-              type="checkbox"
               value="2"
               id="chuhai"
               onChange={handleChange}
@@ -167,32 +163,11 @@ function App() {
             <label htmlFor="chuhai">チューハイ</label>
             <input
               type="checkbox"
-              value="3"
-              id="low_malt_beer"
-              onChange={handleChange}
-            />
-            <label htmlFor="low_malt_beer">発泡酒</label>
-            <input
-              type="checkbox"
               value="4"
               id="cocktail"
               onChange={handleChange}
             />
             <label htmlFor="cocktail">カクテル</label>
-            <input
-              type="checkbox"
-              value="5"
-              id="sake"
-              onChange={handleChange}
-            />
-            <label htmlFor="sake">日本酒</label>
-            <input
-              type="checkbox"
-              value="6"
-              id="wine"
-              onChange={handleChange}
-            />
-            <label htmlFor="wine">ワイン</label>
           </div>
           <div>
             <label htmlFor="">メーカー</label>
