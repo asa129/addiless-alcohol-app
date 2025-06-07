@@ -77,12 +77,16 @@ export const searchData: (
 export const getDataByAlcohols: (
   props: AdditivesSearch
 ) => Promise<Partial<Alcohols>[]> = async (props) => {
-  const { sake_name } = props;
-  const { data, error } = await supabase
+  const { sake_name, maker } = props;
+  let query = supabase
     .from("alcohols")
     .select("* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)")
     .like(`sake_name`, `%${sake_name}%`);
 
+  if (maker) {
+    query = query.eq(`manufacturer_id`, `${maker}`);
+  }
+  const { data, error } = await query;
   if (error) {
     throw new Error(error.message);
   }

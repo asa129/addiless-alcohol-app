@@ -148,6 +148,16 @@ function App() {
             <input type="text" id="sake_name" {...register("sake_name")} />
           </div>
           <div>
+            <label htmlFor="maker">メーカー</label>
+            <select id="maker" {...register("maker")}>
+              <option value="">メーカーを選んでください</option>
+              <option value="1">サントリー</option>
+              <option value="2">アサヒ</option>
+              <option value="3">キリン</option>
+              <option value="4">サッポロ</option>
+            </select>
+          </div>
+          <div>
             <input type="submit" value="検索" data-testid="search_button2" />
           </div>
         </form>
@@ -168,16 +178,6 @@ function App() {
               onChange={handleChange}
             />
             <label htmlFor="cocktail">カクテル</label>
-          </div>
-          <div>
-            <label htmlFor="">メーカー</label>
-            <select>
-              <option value="">メーカーを選んでください</option>
-              <option value="1">サントリー</option>
-              <option value="2">アサヒ</option>
-              <option value="3">キリン</option>
-              <option value="4">サッポロ</option>
-            </select>
           </div>
         </div>
       </div>
