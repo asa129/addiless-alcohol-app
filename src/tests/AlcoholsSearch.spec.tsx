@@ -24,8 +24,8 @@ describe("AlcoholsSearch", () => {
   });
 
   it("商品名で検索すると、検索結果が表示される", async () => {
-    render(<App />);
     const user = userEvent.setup();
+    render(<App />);
     const searchInput = await screen.findByTestId("search_sake_name");
     const searchButton = await screen.findByTestId("search_button2");
 
@@ -76,5 +76,22 @@ describe("AlcoholsSearch", () => {
     expect(
       await screen.findByText("アサヒSlatシャルドネサワー")
     ).toBeInTheDocument();
+  });
+
+  it("検索結果がない場合、メッセージが表示される", async () => {
+    render(<App />);
+    const user = userEvent.setup();
+    const searchInput = await screen.findByTestId("search_sake_name");
+    const searchButton = await screen.findByTestId("search_button2");
+
+    // 存在しない商品名を入力して検索ボタンをクリック
+    await user.type(searchInput, "存在しない商品");
+    await user.click(searchButton);
+
+    // ちょっと待つ
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // 検索結果がないことを確認
+    expect(await screen.findByText("検索結果ないよ")).toBeInTheDocument();
   });
 });
