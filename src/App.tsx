@@ -145,11 +145,16 @@ function App() {
         <form onSubmit={handleSubmit(onAlcoholsSubmit)}>
           <div>
             <label htmlFor="sake_name">お酒の名前で検索</label>
-            <input type="text" id="sake_name" {...register("sake_name")} />
+            <input
+              type="text"
+              id="sake_name"
+              {...register("sake_name")}
+              data-testid="search_sake_name"
+            />
           </div>
           <div>
             <label htmlFor="maker">メーカー</label>
-            <select id="maker" {...register("maker")}>
+            <select id="maker" {...register("maker")} data-testid="maker">
               <option value="">メーカーを選んでください</option>
               <option value="1">サントリー</option>
               <option value="2">アサヒ</option>
@@ -162,13 +167,14 @@ function App() {
           </div>
         </form>
         <div>
-          <div>
+          <div data-testid="select_genres">
             <label htmlFor="genre_id">お酒のジャンル</label>
             <input
               type="checkbox"
               value="2"
               id="chuhai"
               onChange={handleChange}
+              data-testid="chuhai"
             />
             <label htmlFor="chuhai">チューハイ</label>
             <input
@@ -176,6 +182,7 @@ function App() {
               value="4"
               id="cocktail"
               onChange={handleChange}
+              data-testid="cocktail"
             />
             <label htmlFor="cocktail">カクテル</label>
           </div>
