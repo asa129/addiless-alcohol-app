@@ -3,7 +3,6 @@ import App from "../App";
 import { render, screen } from "@testing-library/react";
 import {
   getAllData,
-  getDataByAlcohols,
   getDataByGenres,
   searchData,
 } from "../utils/supabaseFunctions";
@@ -13,14 +12,12 @@ jest.mock("../utils/supabaseFunctions.ts", () => ({
   getAllData: jest.fn(),
   getDataByGenres: jest.fn(),
   searchData: jest.fn(),
-  getDataByAlcohols: jest.fn(),
 }));
 
 beforeEach(() => {
   (getAllData as jest.Mock).mockClear();
   (getDataByGenres as jest.Mock).mockClear();
   (searchData as jest.Mock).mockClear();
-  (getDataByAlcohols as jest.Mock).mockClear();
 });
 
 describe("AlcoholsSearch", () => {
@@ -67,13 +64,13 @@ describe("AlcoholsSearch", () => {
 
     // モック関数の実装
     (getAllData as jest.Mock).mockResolvedValue(mockData);
-    (getDataByAlcohols as jest.Mock).mockResolvedValue(mockDataByAlcohols);
+    (getDataByGenres as jest.Mock).mockResolvedValue(mockDataByAlcohols);
     (searchData as jest.Mock).mockResolvedValue(mockDataByAlcohols);
 
     render(<App />);
 
     const searchInput = await screen.findByTestId("search_sake_name");
-    const searchButton = await screen.findByTestId("search_button2");
+    const searchButton = await screen.findByTestId("search_button");
     // 商品名を入力して検索ボタンをクリック
     await user.type(searchInput, "アサヒ");
     await user.click(searchButton);
@@ -213,12 +210,11 @@ describe("AlcoholsSearch", () => {
     const noMockData: Partial<Alcohols>[] = [];
     // モック関数の実装
     (getAllData as jest.Mock).mockResolvedValue(mockData);
-    (getDataByAlcohols as jest.Mock).mockResolvedValue(noMockData);
     (searchData as jest.Mock).mockResolvedValue(noMockData);
     render(<App />);
     const user = userEvent.setup();
     const searchInput = await screen.findByTestId("search_sake_name");
-    const searchButton = await screen.findByTestId("search_button2");
+    const searchButton = await screen.findByTestId("search_button");
 
     // 存在しない商品名を入力して検索ボタンをクリック
     await user.type(searchInput, "存在しない商品");

@@ -1,6 +1,5 @@
 import {
   getAllData,
-  getDataByAlcohols,
   getDataByGenres,
   searchData,
 } from "./utils/supabaseFunctions.ts";
@@ -44,11 +43,6 @@ function App() {
     aditivesSearch(formData);
   };
 
-  const onAlcoholsSubmit: SubmitHandler<AdditivesSearch> = async (formData) => {
-    const searchByAlcoholsData = await getDataByAlcohols(formData);
-    setData(searchByAlcoholsData);
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       setGenreId([...genreId, e.target.value]);
@@ -67,6 +61,7 @@ function App() {
     };
     fetchDataByGenres();
   }, [genreId]);
+  console.log("genreId", genreId);
 
   useEffect(() => {
     getData();
@@ -131,17 +126,24 @@ function App() {
                 setValue("additives", "");
                 setValue("additivesWord", "");
               }}
-              defaultChecked
               id="not_have_additives"
               data-testid="not_have_additives"
             />
             <label htmlFor="not_have_additives">なし</label>
+            <input
+              type="radio"
+              {...register("have_additives")}
+              value=""
+              onClick={() => {
+                setValue("additives", "");
+                setValue("additivesWord", "");
+              }}
+              defaultChecked
+              id="not_specified_additives"
+              data-testid="not_specified_additives"
+            />
+            <label htmlFor="not_specified_additives">指定しない</label>
           </div>
-          <div>
-            <input type="submit" value="検索" data-testid="search_button" />
-          </div>
-        </form>
-        <form onSubmit={handleSubmit(onAlcoholsSubmit)}>
           <div>
             <label htmlFor="sake_name">お酒の名前で検索</label>
             <input
@@ -162,7 +164,7 @@ function App() {
             </select>
           </div>
           <div>
-            <input type="submit" value="検索" data-testid="search_button2" />
+            <input type="submit" value="検索" data-testid="search_button" />
           </div>
         </form>
         <div>

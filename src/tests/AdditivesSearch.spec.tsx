@@ -3,7 +3,6 @@ import App from "../App";
 import userEvent from "@testing-library/user-event";
 import {
   getAllData,
-  getDataByAlcohols,
   getDataByGenres,
   searchData,
 } from "../utils/supabaseFunctions";
@@ -13,14 +12,12 @@ jest.mock("../utils/supabaseFunctions.ts", () => ({
   getAllData: jest.fn(),
   getDataByGenres: jest.fn(),
   searchData: jest.fn(),
-  getDataByAlcohols: jest.fn(),
 }));
 
 beforeEach(() => {
   (getAllData as jest.Mock).mockClear();
   (getDataByGenres as jest.Mock).mockClear();
   (searchData as jest.Mock).mockClear();
-  (getDataByAlcohols as jest.Mock).mockClear();
 });
 
 describe("AdditivesSearch", () => {
@@ -34,10 +31,13 @@ describe("AdditivesSearch", () => {
     expect(await screen.findByTestId("additives_word")).toBeInTheDocument();
   });
 
-  it("添加物あり/なしラジオボタンが表示されている", async () => {
+  it("添加物あり/なし/指定しないラジオボタンが表示されている", async () => {
     render(<App />);
     expect(await screen.findByTestId("have_additives")).toBeInTheDocument();
     expect(await screen.findByTestId("not_have_additives")).toBeInTheDocument();
+    expect(
+      await screen.findByTestId("not_specified_additives")
+    ).toBeInTheDocument();
   });
 
   it("人工甘味料を選択して検索すると、人工甘味料のデータが表示される", async () => {
@@ -116,7 +116,6 @@ describe("AdditivesSearch", () => {
     ];
     // モック関数の設定
     (getAllData as jest.Mock).mockResolvedValue(mockData);
-    (getDataByAlcohols as jest.Mock).mockResolvedValue(mockDataByAlcohols);
     (searchData as jest.Mock).mockResolvedValue(mockDataByAlcohols);
 
     const user = userEvent.setup();
@@ -156,7 +155,6 @@ describe("AdditivesSearch", () => {
     ];
     // モック関数の設定
     (getAllData as jest.Mock).mockResolvedValue(mockData);
-    (getDataByAlcohols as jest.Mock).mockResolvedValue(mockDataHaveAdditives);
     (searchData as jest.Mock).mockResolvedValue(mockDataHaveAdditives);
 
     const user = userEvent.setup();
@@ -196,9 +194,6 @@ describe("AdditivesSearch", () => {
     ];
     // モック関数の設定
     (getAllData as jest.Mock).mockResolvedValue(mockData);
-    (getDataByAlcohols as jest.Mock).mockResolvedValue(
-      mockDataNotHaveAdditives
-    );
     (searchData as jest.Mock).mockResolvedValue(mockDataNotHaveAdditives);
 
     const user = userEvent.setup();
@@ -231,7 +226,6 @@ describe("AdditivesSearch", () => {
     const mockDataNo: Partial<Alcohols>[] = [];
     // モック関数の設定
     (getAllData as jest.Mock).mockResolvedValue(mockData);
-    (getDataByAlcohols as jest.Mock).mockResolvedValue(mockDataNo);
     (searchData as jest.Mock).mockResolvedValue(mockDataNo);
     const user = userEvent.setup();
     render(<App />);
