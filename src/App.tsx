@@ -71,7 +71,6 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
-  genreId.map((id) => console.log(id));
 
   if (isLoading) {
     return <div>Loading...</div>;
