@@ -8,6 +8,7 @@ import type { Alcohols } from "./domain/Alcohols.ts";
 import { Modal } from "./components/Modal.tsx";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { AdditivesSearch } from "./domain/AdditivesSearch.ts";
+import "./App.css";
 
 function App() {
   const [data, setData] = useState<Partial<Alcohols>[]>();
@@ -15,6 +16,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedData, setSelectedData] = useState<Partial<Alcohols>>();
   const [genreId, setGenreId] = useState<string[]>([]);
+  const [disabled, setDisabled] = useState(true);
   const getData = async () => {
     const data = await getAllData();
     setData(data);
@@ -61,18 +63,19 @@ function App() {
     };
     fetchDataByGenres();
   }, [genreId]);
-  console.log("genreId", genreId);
 
   useEffect(() => {
     getData();
   }, []);
+
+  console.log(disabled);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
   return (
     <>
-      <h1 data-testid="title" onClick={() => getData()}>
+      <h1 text-3xl font-bold data-testid="title" onClick={() => getData()}>
         成分表示でお酒を検索
       </h1>
       <div>
@@ -86,6 +89,7 @@ function App() {
               onChange={() => {
                 setValue("have_additives", "1");
               }}
+              disabled={disabled}
             >
               <option value="">添加物を選んでください</option>
               <option value="甘味料">人工甘味料</option>
@@ -106,6 +110,7 @@ function App() {
                 setValue("have_additives", "1");
               }}
               data-testid="additives_word"
+              disabled={disabled}
             />
           </div>
           <div>
@@ -116,6 +121,9 @@ function App() {
               value="1"
               id="have_additives"
               data-testid="have_additives"
+              onClick={() => {
+                setDisabled(false);
+              }}
             />
             <label htmlFor="have_additives">あり</label>
             <input
@@ -125,6 +133,7 @@ function App() {
               onClick={() => {
                 setValue("additives", "");
                 setValue("additivesWord", "");
+                setDisabled(true);
               }}
               id="not_have_additives"
               data-testid="not_have_additives"
@@ -137,6 +146,7 @@ function App() {
               onClick={() => {
                 setValue("additives", "");
                 setValue("additivesWord", "");
+                setDisabled(true);
               }}
               defaultChecked
               id="not_specified_additives"

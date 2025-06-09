@@ -12,12 +12,14 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",
+    "@tailwindcss/vite": "^4.1.8",
     "@types/dotenv": "^6.1.1",
     "dotenv": "^16.5.0",
     "firebase": "^11.7.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.4",
+    "tailwindcss": "^4.1.8",
     "vite-plugin-env-compatible": "^2.0.1"
   },
   "devDependencies": {
