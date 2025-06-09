@@ -6,6 +6,6 @@ export default {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
   moduleNameMapper: {
-    "\\.(css|less)$": "identity-obj-proxy",
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
   },
 };
