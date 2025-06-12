@@ -73,11 +73,7 @@ function App() {
   }
   return (
     <>
-      <h1
-        className="text-3xl font-bold"
-        data-testid="title"
-        onClick={() => getData()}
-      >
+      <h1 data-testid="title" onClick={() => getData()}>
         成分表示でお酒を検索
       </h1>
       <div>
