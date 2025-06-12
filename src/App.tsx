@@ -9,6 +9,8 @@ import { Modal } from "./components/Modal.tsx";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { AdditivesSearch } from "./domain/AdditivesSearch.ts";
 import "./App.css";
+import { Header } from "./components/Header.tsx";
+import { Footer } from "./components/Foorter.tsx";
 
 function App() {
   const [data, setData] = useState<Partial<Alcohols>[]>();
@@ -73,9 +75,10 @@ function App() {
   }
   return (
     <>
-      <h1 data-testid="title" onClick={() => getData()}>
+      {/* <h1 data-testid="title" onClick={() => getData()}>
         成分表示でお酒を検索
-      </h1>
+      </h1> */}
+      <Header onClickData={getData} />
       <div>
         <form onSubmit={handleSubmit(onAdditivesSubmit)}>
           <div>
@@ -247,6 +250,7 @@ function App() {
           </tbody>
         </table>
       )}
+      <Footer />
     </>
   );
 }
