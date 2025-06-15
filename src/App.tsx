@@ -19,6 +19,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedData, setSelectedData] = useState<Partial<Alcohols>>();
   const [genreId, setGenreId] = useState<string[]>([]);
+  const [isDetailedFilterOpen, setIsDetailedFilterOpen] = useState(false);
 
   const getData = async () => {
     const data = await getAllData();
@@ -60,13 +61,18 @@ function App() {
   return (
     <>
       <div className="min-h-screen bg-brand-cream flex flex-col">
-        <Header onClickData={getData} />
+        <Header
+          onClickData={getData}
+          setIsDetailedFilterOpen={setIsDetailedFilterOpen}
+        />
         <div className="flex-grow container mx-auto px-4 py-8 md:py-12">
           <Search
             getData={getData}
             additivesSearch={additivesSearch}
             setGenreId={setGenreId}
             genreId={genreId}
+            isDetailedFilterOpen={isDetailedFilterOpen}
+            setIsDetailedFilterOpen={setIsDetailedFilterOpen}
           />
           <Card data={data} handleOpenModal={handleOpenModal} />
         </div>

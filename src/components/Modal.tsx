@@ -27,23 +27,30 @@ export const Modal = (props: {
                     className="absolute top-0 left-0 w-full h-full object-contain bg-white p-2"
                   />
                 </div>
-                <div data-testid="modal_title" className="flex-grow">
+                <div
+                  data-testid="modal_title"
+                  className="flex-grow flex flex-col items-start"
+                >
                   <div
                     data-testid="modal_sake_name"
-                    className="text-2xl md:text-3xl font-bold text-brand-navy-dark jp-text leading-tight mb-2"
+                    className="text-2xl md:text-3xl font-bold text-brand-navy-dark jp-text leading-tight mb-2 text-left"
                   >
                     {selectedData.sake_name}
                   </div>
                   <div
                     data-testid="modal_alcohol_genres"
-                    // data-testid="modal_manufacturers"
                     className="text-brand-navy jp-text mt-2 text-lg font-medium"
                   >
-                    {selectedData.manufacturers?.manufacturer_name} -{" "}
+                    {selectedData.manufacturers?.manufacturer_name}
+                  </div>
+                  <div
+                    data-testid="modal_manufacturers"
+                    className="text-brand-navy jp-text mt-2 text-lg font-medium"
+                  >
                     {selectedData.alcohol_genres?.genre_name}
                   </div>
                   <div
-                    className={`mt-4 text-base px-4 py-2 rounded-xl font-bold jp-text shadow-lg inline-flex items-center ${
+                    className={`mt-4 text-base px-4 py-2 rounded-xl font-bold jp-text shadow-lg inline-flex  ${
                       selectedData.has_additives
                         ? "bg-brand-teal-light text-brand-teal-dark border border-brand-teal" // Softer teal for "has additives"
                         : "bg-brand-blue-light text-brand-blue-dark border border-brand-blue" // Muted blue for "no additives"

@@ -5,18 +5,28 @@ import { RiResetLeftFill } from "react-icons/ri";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import type { AdditivesSearch } from "../domain/AdditivesSearch";
+import { IoMdClose } from "react-icons/io";
 
 export const Search = (props: {
   getData: () => Promise<void>;
   additivesSearch: (formData: AdditivesSearch) => Promise<void>;
   setGenreId: React.Dispatch<React.SetStateAction<string[]>>;
   genreId: string[];
+  isDetailedFilterOpen: boolean;
+  setIsDetailedFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { getData, additivesSearch, setGenreId, genreId } = props;
+  const {
+    getData,
+    additivesSearch,
+    setGenreId,
+    genreId,
+    isDetailedFilterOpen,
+    setIsDetailedFilterOpen,
+  } = props;
   const [disabled, setDisabled] = useState(false);
-  const [isDetailedFilterOpen, setIsDetailedFilterOpen] = useState(false);
 
-  const { handleSubmit, register, setValue } = useForm<AdditivesSearch>();
+  const { handleSubmit, register, setValue, resetField } =
+    useForm<AdditivesSearch>();
   const onAdditivesSubmit: SubmitHandler<AdditivesSearch> = (formData) => {
     if (formData.have_additives === "0") {
       formData.additives = "";
@@ -33,6 +43,14 @@ export const Search = (props: {
     }
   };
 
+  const handleReset = () => {
+    resetField("sake_name");
+    setValue("have_additives", "");
+    setValue("additives", "");
+    setValue("additivesWord", "");
+    setValue("maker", "");
+  };
+
   return (
     <div className="mb-10 md:mb-12">
       {/* Main Search Card */}
@@ -41,7 +59,10 @@ export const Search = (props: {
           <h2
             className="text-4xl font-bold text-brand-navy-dark jp-text mb-2"
             data-testid="title"
-            onClick={() => getData()}
+            onClick={() => {
+              getData();
+              setIsDetailedFilterOpen(false);
+            }}
           >
             成分表示でお酒を検索
           </h2>
@@ -65,6 +86,13 @@ export const Search = (props: {
                 data-testid="search_sake_name"
                 className="w-full pl-12 pr-4 py-3 bg-brand-cream-dark border border-brand-gray rounded-xl text-base h-14 shadow-sm placeholder:text-brand-gray-dark focus:ring-brand-blue focus:border-brand-blue"
               />
+              <button
+                type="button"
+                className="absolute right-4 top-1/2 -translate-y-1/2"
+                onClick={() => resetField("sake_name")}
+              >
+                <IoMdClose className="h-5 w-5 text-brand-gray-dark" />
+              </button>
             </div>
             <div className="space-y-4 pt-2">
               <div className="text-center">
@@ -304,7 +332,10 @@ export const Search = (props: {
                 </div>
               </div>
               <div className="flex justify-end pt-4">
-                <button className="border border-brand-teal text-brand-teal-dark hover:bg-brand-teal-light/20 rounded-xl transition-all duration-300 ease-in-out jp-text text-base font-semibold h-12 shadow-lg hover:shadow-xl flex items-center justify-center px-6">
+                <button
+                  onClick={handleReset}
+                  className="border border-brand-teal text-brand-teal-dark hover:bg-brand-teal-light/20 rounded-xl transition-all duration-300 ease-in-out jp-text text-base font-semibold h-12 shadow-lg hover:shadow-xl flex items-center justify-center px-6"
+                >
                   <RiResetLeftFill className="mr-3 h-5 w-5" />
                   リセット
                 </button>
