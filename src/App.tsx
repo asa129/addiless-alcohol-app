@@ -59,15 +59,18 @@ function App() {
   }
   return (
     <>
-      <Header onClickData={getData} />
-      <div className="flex-grow container mx-auto px-4 py-8 md:py-12">
-        <Search
-          getData={getData}
-          additivesSearch={additivesSearch}
-          setGenreId={setGenreId}
-          genreId={genreId}
-        />
-        <Card data={data} handleOpenModal={handleOpenModal} />
+      <div className="min-h-screen bg-brand-cream flex flex-col">
+        <Header onClickData={getData} />
+        <div className="flex-grow container mx-auto px-4 py-8 md:py-12">
+          <Search
+            getData={getData}
+            additivesSearch={additivesSearch}
+            setGenreId={setGenreId}
+            genreId={genreId}
+          />
+          <Card data={data} handleOpenModal={handleOpenModal} />
+        </div>
+        <Footer />
         {isModalOpen && (
           <Modal
             isOpen={isModalOpen}
@@ -76,7 +79,6 @@ function App() {
           />
         )}
       </div>
-      <Footer />
     </>
   );
 }
