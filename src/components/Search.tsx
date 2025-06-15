@@ -57,7 +57,7 @@ export const Search = (props: {
       <div className="shadow-xl border border-brand-gray bg-white rounded-2xl overflow-hidden">
         <div className="p-8 text-center">
           <h2
-            className="text-4xl font-bold text-brand-navy-dark jp-text mb-2"
+            className="text-2xl md:text-4xl font-bold text-brand-navy-dark jp-text mb-2"
             data-testid="title"
             onClick={() => {
               getData();
@@ -67,7 +67,7 @@ export const Search = (props: {
             成分表示でお酒を検索
           </h2>
 
-          <p className="text-brand-navy jp-text text-lg">
+          <p className="text-brand-navy jp-text text-sm md:text-lg">
             アレルギーや体質に合わせて、あなたにぴったりのお酒を見つけましょう
           </p>
         </div>

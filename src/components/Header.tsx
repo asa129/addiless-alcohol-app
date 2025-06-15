@@ -6,8 +6,8 @@ export const Header = (props: {
 }) => {
   const { onClickData, setIsDetailedFilterOpen } = props;
   return (
-    <header className="py-8 md:py-12 bg-brand-blue-light shadow-lg">
-      <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between">
+    <header className="py-4 md:py-12 bg-brand-blue-light shadow-lg">
+      <div className="container mx-auto px-0 md:px-4 flex flex-col sm:flex-row items-center justify-between">
         <div className="flex items-center gap-4 mb-3 sm:mb-0">
           <div className="p-3 bg-white/50 rounded-xl backdrop-blur-sm border border-white/70">
             <BiDrink className="h-8 w-8 text-brand-navy-dark" />
