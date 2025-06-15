@@ -233,6 +233,13 @@ export const Search = (props: {
                     placeholder="添加物名を入力..."
                     className="w-full pl-12 pr-4 py-3 bg-white border border-brand-gray focus:ring-brand-blue focus:border-brand-blue rounded-xl jp-text text-base h-12 shadow-sm disabled:bg-gray-100 disabled:text-gray-500 disabled:border-gray-300"
                   />
+                  <button
+                    type="button"
+                    className="absolute right-4 top-1/2 -translate-y-1/2"
+                    onClick={() => resetField("additivesWord")}
+                  >
+                    <IoMdClose className="h-5 w-5 text-brand-gray-dark" />
+                  </button>
                 </div>
               </div>
               <div className="space-y-3">
