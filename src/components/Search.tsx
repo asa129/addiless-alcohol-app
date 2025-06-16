@@ -3,53 +3,40 @@ import { TbListDetails } from "react-icons/tb";
 import { FaChevronDown } from "react-icons/fa6";
 import { RiResetLeftFill } from "react-icons/ri";
 import { useState } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
 import type { AdditivesSearch } from "../domain/AdditivesSearch";
 import { IoMdClose } from "react-icons/io";
+import type {
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormResetField,
+  UseFormSetValue,
+} from "react-hook-form";
 
 export const Search = (props: {
   getData: () => Promise<void>;
   additivesSearch: (formData: AdditivesSearch) => Promise<void>;
-  setGenreId: React.Dispatch<React.SetStateAction<string[]>>;
-  genreId: string[];
   isDetailedFilterOpen: boolean;
   setIsDetailedFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmit: UseFormHandleSubmit<AdditivesSearch, AdditivesSearch>;
+  register: UseFormRegister<AdditivesSearch>;
+  setValue: UseFormSetValue<AdditivesSearch>;
+  resetField: UseFormResetField<AdditivesSearch>;
+  onAdditivesSubmit: SubmitHandler<AdditivesSearch>;
+  handleReset: () => void;
 }) => {
   const {
     getData,
-    additivesSearch,
-    setGenreId,
-    genreId,
     isDetailedFilterOpen,
     setIsDetailedFilterOpen,
+    handleSubmit,
+    register,
+    setValue,
+    resetField,
+    onAdditivesSubmit,
+    handleReset,
   } = props;
   const [disabled, setDisabled] = useState(false);
-
-  const { handleSubmit, register, setValue, resetField } =
-    useForm<AdditivesSearch>();
-  const onAdditivesSubmit: SubmitHandler<AdditivesSearch> = (formData) => {
-    if (formData.have_additives === "0") {
-      formData.additives = "";
-      formData.additivesWord = "";
-    }
-    additivesSearch(formData);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setGenreId([...genreId, e.target.value]);
-    } else {
-      setGenreId(genreId.filter((id) => id !== e.target.value));
-    }
-  };
-
-  const handleReset = () => {
-    resetField("sake_name");
-    setValue("have_additives", "");
-    setValue("additives", "");
-    setValue("additivesWord", "");
-    setValue("maker", "");
-  };
 
   return (
     <div className="mb-10 md:mb-12">
@@ -256,87 +243,6 @@ export const Search = (props: {
                   <option value="3">キリン</option>
                   <option value="4">サッポロ</option>
                 </select>
-              </div>
-              <div data-testid="select_genres" className="space-y-4">
-                <label
-                  htmlFor="genre_id"
-                  className="text-base font-semibold text-brand-navy-dark jp-text"
-                >
-                  お酒のジャンル
-                </label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 pt-2">
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      value="2"
-                      id="chuhai"
-                      onChange={handleChange}
-                      data-testid="chuhai"
-                      className="data-[state=checked]:bg-brand-blue data-[state=checked]:text-white border border-brand-blue w-5 h-5 rounded-md"
-                    />
-                    <label
-                      htmlFor="chuhai"
-                      className="font-medium text-brand-navy jp-text text-base cursor-pointer"
-                    >
-                      チューハイ
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      value="4"
-                      id="cocktail"
-                      onChange={handleChange}
-                      data-testid="cocktail"
-                      className="data-[state=checked]:bg-brand-blue data-[state=checked]:text-white border border-brand-blue w-5 h-5 rounded-md"
-                    />
-                    <label htmlFor="cocktail">カクテル</label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      value="4"
-                      id="cocktail"
-                      onChange={handleChange}
-                      data-testid="cocktail"
-                      className="data-[state=checked]:bg-brand-blue data-[state=checked]:text-white border border-brand-blue w-5 h-5 rounded-md"
-                    />
-                    <label htmlFor="cocktail">カクテル</label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      value="4"
-                      id="cocktail"
-                      onChange={handleChange}
-                      data-testid="cocktail"
-                      className="data-[state=checked]:bg-brand-blue data-[state=checked]:text-white border border-brand-blue w-5 h-5 rounded-md"
-                    />
-                    <label htmlFor="cocktail">カクテル</label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      value="4"
-                      id="cocktail"
-                      onChange={handleChange}
-                      data-testid="cocktail"
-                      className="data-[state=checked]:bg-brand-blue data-[state=checked]:text-white border border-brand-blue w-5 h-5 rounded-md"
-                    />
-                    <label htmlFor="cocktail">カクテル</label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      value="4"
-                      id="cocktail"
-                      onChange={handleChange}
-                      data-testid="cocktail"
-                      className="data-[state=checked]:bg-brand-blue data-[state=checked]:text-white border border-brand-blue w-5 h-5 rounded-md"
-                    />
-                    <label htmlFor="cocktail">カクテル</label>
-                  </div>
-                </div>
               </div>
               <div className="flex justify-end pt-4">
                 <button

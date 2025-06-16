@@ -3,8 +3,9 @@ import { BiDrink } from "react-icons/bi";
 export const Header = (props: {
   onClickData: () => Promise<void>;
   setIsDetailedFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleReset: () => void;
 }) => {
-  const { onClickData, setIsDetailedFilterOpen } = props;
+  const { onClickData, setIsDetailedFilterOpen, handleReset } = props;
   return (
     <header className="py-4 md:py-12 bg-brand-blue-light shadow-lg">
       <div className="container mx-auto px-0 md:px-4 flex flex-col sm:flex-row items-center justify-between">
@@ -17,6 +18,7 @@ export const Header = (props: {
             onClick={() => {
               onClickData();
               setIsDetailedFilterOpen(false);
+              handleReset();
             }}
           >
             AddiLess
