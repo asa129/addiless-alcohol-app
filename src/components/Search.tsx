@@ -133,7 +133,7 @@ export const Search = (props: {
                       {...register("have_additives")}
                       value=""
                       onClick={() => {
-                        setDisabled(false);
+                        setDisabled(true);
                       }}
                       defaultChecked
                       id="not_specified_additives"
@@ -167,6 +167,7 @@ export const Search = (props: {
         <div className="shadow-xl border border-brand-gray bg-white rounded-2xl overflow-hidden">
           <button
             onClick={() => setIsDetailedFilterOpen(!isDetailedFilterOpen)}
+            data-testid="detail_filter_button"
             className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 rounded-2xl transition-colors"
           >
             <div className="flex items-center gap-2">
