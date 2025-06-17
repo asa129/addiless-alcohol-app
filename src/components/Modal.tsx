@@ -2,7 +2,6 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import type { Alcohols } from "../domain/Alcohols";
 import { CiCircleInfo, CiWarning } from "react-icons/ci";
 import { BsCheck2Circle } from "react-icons/bs";
-import { GiMedicines } from "react-icons/gi";
 
 export const Modal = (props: {
   isOpen: boolean;
