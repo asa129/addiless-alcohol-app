@@ -42,12 +42,20 @@ export const searchData: (
   const { additives, additivesWord, have_additives, sake_name, maker } = props;
   let query = supabase
     .from("alcohols")
-    .select("* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)")
-    .like(`additives_text`, `%${additives}%`)
-    .like(`additives_text`, `%${additivesWord}%`);
+    .select(
+      "* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)"
+    );
 
-  if (have_additives) {
-    query = query.eq(`has_additives`, `${have_additives === "1"}`);
+  if (additives) {
+    query = query.like(`additives_text`, `%${additives}%`);
+  }
+
+  if (additivesWord) {
+    query = query.like(`additives_text`, `%${additivesWord}%`);
+  }
+
+  if (have_additives !== undefined && have_additives !== "") {
+    query = query.eq(`has_additives`, have_additives === "1");
   }
 
   if (sake_name) {
