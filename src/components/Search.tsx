@@ -49,6 +49,7 @@ export const Search = (props: {
             onClick={() => {
               getData();
               setIsDetailedFilterOpen(false);
+              handleReset();
             }}
           >
             成分表示でお酒を検索
@@ -133,7 +134,7 @@ export const Search = (props: {
                       {...register("have_additives")}
                       value=""
                       onClick={() => {
-                        setDisabled(true);
+                        setDisabled(false);
                       }}
                       defaultChecked
                       id="not_specified_additives"

@@ -32,7 +32,7 @@ function App() {
   const additivesSearch = async (formData: AdditivesSearch) => {
     const searchDatas = await searchData(formData);
     setData(searchDatas);
-    handleReset();
+    handleReset(false);
     setIsDetailedFilterOpen(false);
   };
 
@@ -55,9 +55,11 @@ function App() {
     additivesSearch(formData);
   };
 
-  const handleReset = () => {
+  const handleReset = (have_additives_rest: boolean) => {
     resetField("sake_name");
-    setValue("have_additives", "");
+    if (have_additives_rest) {
+      setValue("have_additives", "");
+    }
     resetField("additives");
     resetField("additivesWord");
     resetField("maker");
@@ -95,7 +97,7 @@ function App() {
         <Header
           onClickData={getData}
           setIsDetailedFilterOpen={setIsDetailedFilterOpen}
-          handleReset={handleReset}
+          handleReset={() => handleReset(true)}
         />
         <div className="flex-grow container mx-auto px-4 py-8 md:py-12">
           <Search
@@ -108,7 +110,7 @@ function App() {
             setValue={setValue}
             resetField={resetField}
             onAdditivesSubmit={onAdditivesSubmit}
-            handleReset={handleReset}
+            handleReset={() => handleReset(true)}
           />
           <CategoryFilter handleChange={handleChange} genreId={genreId} />
           <Card data={data} handleOpenModal={handleOpenModal} />
