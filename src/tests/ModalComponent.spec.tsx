@@ -9,7 +9,6 @@ jest.mock("../utils/supabaseFunctions.ts", () => ({
 }));
 
 // モックデータの準備
-// モックデータの準備
 const mockData = [
   {
     id: 1,
@@ -69,7 +68,7 @@ describe("Modal", () => {
     const detailButton = await screen.findAllByTestId("sake_detail");
     await user.click(detailButton[0]);
     expect(await screen.findByTestId("modal_title")).toHaveTextContent(
-      "モーダル"
+      "ビール"
     );
   });
 
