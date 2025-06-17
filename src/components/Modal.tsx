@@ -92,7 +92,7 @@ export const Modal = (props: {
                 </div>
               </div>
 
-              <div data-testid="modal_additives_section">
+              {/* <div data-testid="modal_additives_section">
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
                   <GiMedicines className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
                   添加物
@@ -105,7 +105,7 @@ export const Modal = (props: {
                     {selectedData.additives_text || "情報なし"}
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
