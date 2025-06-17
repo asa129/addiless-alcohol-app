@@ -38,13 +38,13 @@ export const Modal = (props: {
                     {selectedData.sake_name}
                   </div>
                   <div
-                    data-testid="modal_alcohol_genres"
+                    data-testid="modal_manufacturers"
                     className="text-brand-navy jp-text mt-1 sm:mt-2 text-sm sm:text-base md:text-lg font-medium"
                   >
                     {selectedData.manufacturers?.manufacturer_name}
                   </div>
                   <div
-                    data-testid="modal_manufacturers"
+                    data-testid="modal_alcohol_genres"
                     className="text-brand-navy jp-text mt-1 sm:mt-2 text-sm sm:text-base md:text-lg font-medium"
                   >
                     {selectedData.alcohol_genres?.genre_name}
