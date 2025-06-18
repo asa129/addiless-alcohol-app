@@ -82,6 +82,68 @@ export const Modal = (props: {
               <div data-testid="modal_ingredients_text">
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
                   <CiCircleInfo className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
+                  成分(100mlあたり)
+                </h3>
+                <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
+                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
+                    アルコール度数：
+                    {selectedData.alcohol_percentage
+                      ? `${selectedData.alcohol_percentage}%`
+                      : "情報なし"}
+                  </p>
+                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
+                    カロリー：
+                    {selectedData.calories
+                      ? `${selectedData.calories}kcal`
+                      : "情報なし"}
+                  </p>
+                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
+                    糖質：
+                    {selectedData.carbohydrates
+                      ? `${selectedData.carbohydrates}g`
+                      : "情報なし"}
+                  </p>
+                </div>
+              </div>
+
+              <div data-testid="modal_ingredients_text">
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
+                  <CiCircleInfo className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
+                  成分(100mlあたり)
+                </h3>
+                <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
+                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
+                    のみ方：
+                    {selectedData.alcohol_details?.drinking_methods
+                      ? `${selectedData.alcohol_details?.drinking_methods}`
+                      : "情報なし"}
+                  </p>
+                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
+                    カクテルレシピ：
+                    {selectedData.alcohol_details?.cocktail_recipes ? (
+                      <a
+                        href={`${selectedData.alcohol_details?.cocktail_recipes}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {selectedData.alcohol_details?.cocktail_recipes}
+                      </a>
+                    ) : (
+                      "情報なし"
+                    )}
+                  </p>
+                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
+                    ペアリングおつまみ：
+                    {selectedData.alcohol_details?.recommended_snacks
+                      ? `${selectedData.alcohol_details?.recommended_snacks}`
+                      : "情報なし"}
+                  </p>
+                </div>
+              </div>
+
+              <div data-testid="modal_ingredients_text">
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
+                  <CiCircleInfo className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
                   原材料
                 </h3>
                 <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
