@@ -13,6 +13,7 @@ import { Footer } from "./components/Foorter.tsx";
 import { Search } from "./components/Search.tsx";
 import { Card } from "./components/Card.tsx";
 import { useForm, type SubmitHandler } from "react-hook-form";
+
 import { CategoryFilter } from "./components/CategoryFilter.tsx";
 
 function App() {
@@ -88,6 +89,19 @@ function App() {
     getData();
   }, []);
 
+  const searchProps = {
+    getData: getData,
+    additivesSearch: additivesSearch,
+    isDetailedFilterOpen: isDetailedFilterOpen,
+    setIsDetailedFilterOpen: setIsDetailedFilterOpen,
+    handleSubmit: handleSubmit,
+    register: register,
+    setValue: setValue,
+    resetField: resetField,
+    onAdditivesSubmit: onAdditivesSubmit,
+    handleReset: () => handleReset(true),
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -100,18 +114,7 @@ function App() {
           handleReset={() => handleReset(true)}
         />
         <div className="flex-grow container mx-auto px-4 py-8 md:py-12">
-          <Search
-            getData={getData}
-            additivesSearch={additivesSearch}
-            isDetailedFilterOpen={isDetailedFilterOpen}
-            setIsDetailedFilterOpen={setIsDetailedFilterOpen}
-            handleSubmit={handleSubmit}
-            register={register}
-            setValue={setValue}
-            resetField={resetField}
-            onAdditivesSubmit={onAdditivesSubmit}
-            handleReset={() => handleReset(true)}
-          />
+          <Search {...searchProps} />
           <CategoryFilter handleChange={handleChange} genreId={genreId} />
           <Card data={data} handleOpenModal={handleOpenModal} />
         </div>
