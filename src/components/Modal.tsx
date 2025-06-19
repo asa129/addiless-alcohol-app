@@ -1,7 +1,9 @@
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { IoBookOutline, IoCloseCircleOutline } from "react-icons/io5";
 import type { Alcohols } from "../domain/Alcohols";
 import { CiCircleInfo, CiWarning } from "react-icons/ci";
 import { BsCheck2Circle } from "react-icons/bs";
+import { BiDrink } from "react-icons/bi";
+import { MdOutlineRestaurant } from "react-icons/md";
 
 export const Modal = (props: {
   isOpen: boolean;
@@ -84,66 +86,90 @@ export const Modal = (props: {
                   <CiCircleInfo className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
                   成分(100mlあたり)
                 </h3>
-                <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
-                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
-                    アルコール度数：
-                    {selectedData.alcohol_percentage
-                      ? `${selectedData.alcohol_percentage}%`
-                      : "情報なし"}
-                  </p>
-                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
-                    カロリー：
-                    {selectedData.calories
-                      ? `${selectedData.calories}kcal`
-                      : "情報なし"}
-                  </p>
-                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
-                    糖質：
-                    {selectedData.carbohydrates
-                      ? `${selectedData.carbohydrates}g`
-                      : "情報なし"}
-                  </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                  <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-brand-gray-light text-center">
+                    <p className="text-brand-navy jp-text text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                      アルコール度数
+                    </p>
+                    <p className="text-brand-navy-dark jp-text text-lg sm:text-xl md:text-2xl font-bold">
+                      {selectedData.alcohol_percentage
+                        ? `${selectedData.alcohol_percentage}%`
+                        : "情報なし"}
+                    </p>
+                  </div>
+                  <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-brand-gray-light text-center">
+                    <p className="text-brand-navy jp-text text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                      カロリー
+                    </p>
+                    <p className="text-brand-navy-dark jp-text text-lg sm:text-xl md:text-2xl font-bold">
+                      {selectedData.calories
+                        ? `${selectedData.calories}kcal`
+                        : "情報なし"}
+                    </p>
+                  </div>
+                  <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-brand-gray-light text-center">
+                    <p className="text-brand-navy jp-text text-xs sm:text-sm font-medium mb-1 sm:mb-2">
+                      糖質
+                    </p>
+                    <p className="text-brand-navy-dark jp-text text-lg sm:text-xl md:text-2xl font-bold">
+                      {selectedData.carbohydrates
+                        ? `${selectedData.carbohydrates}g`
+                        : "情報なし"}
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <div data-testid="modal_ingredients_text">
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
-                  <CiCircleInfo className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
-                  成分(100mlあたり)
+                  <BiDrink className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
+                  楽しみ方
                 </h3>
-                <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
-                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
-                    のみ方：
-                    {selectedData.alcohol_details?.drinking_methods
-                      ? `${selectedData.alcohol_details?.drinking_methods}`
-                      : "情報なし"}
-                  </p>
-                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
-                    カクテルレシピ：
-                    {selectedData.alcohol_details?.cocktail_recipes ? (
-                      <a
-                        href={`${selectedData.alcohol_details?.cocktail_recipes}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {selectedData.alcohol_details?.cocktail_recipes}
-                      </a>
-                    ) : (
-                      "情報なし"
-                    )}
-                  </p>
-                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
-                    ペアリングおつまみ：
-                    {selectedData.alcohol_details?.recommended_snacks
-                      ? `${selectedData.alcohol_details?.recommended_snacks}`
-                      : "情報なし"}
-                  </p>
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
+                    <p className="text-brand-navy jp-text text-xs sm:text-sm font-medium mb-2">
+                      のみ方
+                    </p>
+                    <p className="text-brand-navy-dark jp-text text-sm sm:text-base font-medium">
+                      {selectedData.alcohol_details?.drinking_methods ||
+                        "情報なし"}
+                    </p>
+                  </div>
+                  <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
+                    <p className="text-brand-navy jp-text text-xs sm:text-sm font-medium mb-2 flex items-center">
+                      <IoBookOutline className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                      カクテルレシピ
+                    </p>
+                    <div className="text-brand-navy-dark jp-text text-sm sm:text-base font-medium">
+                      {selectedData.alcohol_details?.cocktail_recipes ? (
+                        <a
+                          href={`${selectedData.alcohol_details?.cocktail_recipes}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-brand-blue hover:text-brand-blue-dark underline"
+                        >
+                          {selectedData.alcohol_details?.cocktail_recipes}
+                        </a>
+                      ) : (
+                        "情報なし"
+                      )}
+                    </div>
+                  </div>
+                  <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
+                    <p className="text-brand-navy jp-text text-xs sm:text-sm font-medium mb-2 flex items-center">
+                      <MdOutlineRestaurant className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
+                      おすすめペアリング
+                    </p>
+                    <p className="text-brand-navy-dark jp-text text-sm sm:text-base font-medium">
+                      {selectedData.alcohol_details?.recommended_snacks ||
+                        "情報なし"}
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <div data-testid="modal_ingredients_text">
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
-                  <CiCircleInfo className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
                   原材料
                 </h3>
                 <div className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light">
@@ -152,21 +178,6 @@ export const Modal = (props: {
                   </p>
                 </div>
               </div>
-
-              {/* <div data-testid="modal_additives_section">
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
-                  <GiMedicines className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
-                  添加物
-                </h3>
-                <div
-                  data-testid="modal_additives_text"
-                  className="bg-brand-blue-light/10 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-brand-gray-light"
-                >
-                  <p className="text-brand-navy whitespace-pre-wrap jp-text text-sm sm:text-base leading-relaxed">
-                    {selectedData.additives_text || "情報なし"}
-                  </p>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
