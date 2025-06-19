@@ -81,7 +81,7 @@ export const Modal = (props: {
             </div>
 
             <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 max-h-[50vh] sm:max-h-[60vh] overflow-y-auto">
-              <div data-testid="modal_ingredients_text">
+              <div data-testid="modal_component_text">
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
                   <CiCircleInfo className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
                   成分(100mlあたり)
@@ -120,7 +120,7 @@ export const Modal = (props: {
                 </div>
               </div>
 
-              <div data-testid="modal_ingredients_text">
+              <div data-testid="modal_fun_text">
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-brand-navy-dark mb-3 sm:mb-4 flex items-center jp-text">
                   <BiDrink className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3 text-brand-navy" />
                   楽しみ方
