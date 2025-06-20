@@ -1,3 +1,4 @@
+import { useSearchForm } from "./hooks/useSearchForm.ts";
 import {
   getAllData,
   getDataByGenres,
@@ -12,8 +13,6 @@ import { Header } from "./components/Header.tsx";
 import { Footer } from "./components/Foorter.tsx";
 import { Search } from "./components/Search.tsx";
 import { Card } from "./components/Card.tsx";
-import { useForm, type SubmitHandler } from "react-hook-form";
-
 import { CategoryFilter } from "./components/CategoryFilter.tsx";
 
 function App() {
@@ -37,6 +36,8 @@ function App() {
     setIsDetailedFilterOpen(false);
   };
 
+  const searchForm = useSearchForm(additivesSearch);
+
   const handleOpenModal = (data: Partial<Alcohols>) => {
     setSelectedData(data);
     setIsModalOpen(true);
@@ -45,25 +46,8 @@ function App() {
     setIsModalOpen(false);
   };
 
-  const { handleSubmit, register, setValue, resetField } =
-    useForm<AdditivesSearch>();
-
-  const onAdditivesSubmit: SubmitHandler<AdditivesSearch> = (formData) => {
-    if (formData.have_additives === "0") {
-      formData.additives = "";
-      formData.additivesWord = "";
-    }
-    additivesSearch(formData);
-  };
-
   const handleReset = (have_additives_rest: boolean) => {
-    resetField("sake_name");
-    if (have_additives_rest) {
-      setValue("have_additives", "");
-    }
-    resetField("additives");
-    resetField("additivesWord");
-    resetField("maker");
+    searchForm.handleReset(have_additives_rest);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,15 +74,11 @@ function App() {
   }, []);
 
   const searchProps = {
-    getData: getData,
-    additivesSearch: additivesSearch,
-    isDetailedFilterOpen: isDetailedFilterOpen,
-    setIsDetailedFilterOpen: setIsDetailedFilterOpen,
-    handleSubmit: handleSubmit,
-    register: register,
-    setValue: setValue,
-    resetField: resetField,
-    onAdditivesSubmit: onAdditivesSubmit,
+    getData,
+    additivesSearch,
+    isDetailedFilterOpen,
+    setIsDetailedFilterOpen,
+    ...searchForm,
     handleReset: () => handleReset(true),
   };
 
