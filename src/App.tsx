@@ -61,12 +61,13 @@ function App() {
   useEffect(() => {
     if (genreId.length === 0) {
       getData();
+    } else {
+      const fetchDataByGenres = async () => {
+        const searchByGenresData = await getDataByGenres(genreId);
+        setData(searchByGenresData);
+      };
+      fetchDataByGenres();
     }
-    const fetchDataByGenres = async () => {
-      const searchByGenresData = await getDataByGenres(genreId);
-      setData(searchByGenresData);
-    };
-    fetchDataByGenres();
   }, [genreId]);
 
   useEffect(() => {

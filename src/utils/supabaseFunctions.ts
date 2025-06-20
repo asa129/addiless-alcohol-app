@@ -13,7 +13,6 @@ export const getAllData: () => Promise<Partial<Alcohols>[]> = async () => {
     throw new Error(error.message);
   }
 
-  console.log(data);
   const alcohols = data?.map((data: Partial<Alcohols>) => {
     return new Alcohols(
       data.id,
