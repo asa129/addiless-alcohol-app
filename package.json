@@ -11,6 +11,7 @@
     "test": "jest --verbose"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.54.0",
     "@react-icons/all-files": "^4.1.0",
     "@supabase/supabase-js": "^2.49.8",
     "@types/dotenv": "^6.1.1",
