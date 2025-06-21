@@ -18,6 +18,14 @@ export class Alcohols {
     public manufacturers: {
       manufacturer_name: string | undefined;
     },
-    public additives_text: string | undefined
+    public additives_text: string | undefined,
+    public alcohol_percentage: number | undefined,
+    public calories: number | undefined,
+    public carbohydrates: string | undefined,
+    public alcohol_details: {
+      drinking_methods: string | undefined;
+      cocktail_recipes: string | undefined;
+      recommended_snacks: string | undefined;
+    }
   ) {}
 }

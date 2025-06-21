@@ -6,7 +6,7 @@ export const getAllData: () => Promise<Partial<Alcohols>[]> = async () => {
   const { data, error } = await supabase
     .from("alcohols")
     .select(
-      "* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)"
+      "* , alcohol_genres(genre_name) , manufacturers(manufacturer_name), alcohol_details(drinking_methods, cocktail_recipes, recommended_snacks)"
     );
 
   if (error) {
@@ -29,7 +29,15 @@ export const getAllData: () => Promise<Partial<Alcohols>[]> = async () => {
       data.updated_at,
       { genre_name: data.alcohol_genres?.genre_name },
       { manufacturer_name: data.manufacturers?.manufacturer_name },
-      data.additives_text
+      data.additives_text,
+      data.alcohol_percentage,
+      data.calories,
+      data.carbohydrates,
+      {
+        drinking_methods: data.alcohol_details?.drinking_methods,
+        cocktail_recipes: data.alcohol_details?.cocktail_recipes,
+        recommended_snacks: data.alcohol_details?.recommended_snacks,
+      }
     );
   });
 
@@ -42,12 +50,20 @@ export const searchData: (
   const { additives, additivesWord, have_additives, sake_name, maker } = props;
   let query = supabase
     .from("alcohols")
-    .select("* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)")
-    .like(`additives_text`, `%${additives}%`)
-    .like(`additives_text`, `%${additivesWord}%`);
+    .select(
+      "* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)"
+    );
 
-  if (have_additives) {
-    query = query.eq(`has_additives`, `${have_additives === "1"}`);
+  if (additives) {
+    query = query.like(`additives_text`, `%${additives}%`);
+  }
+
+  if (additivesWord) {
+    query = query.like(`additives_text`, `%${additivesWord}%`);
+  }
+
+  if (have_additives !== undefined && have_additives !== "") {
+    query = query.eq(`has_additives`, have_additives === "1");
   }
 
   if (sake_name) {
@@ -80,7 +96,15 @@ export const searchData: (
       data.updated_at,
       { genre_name: data.alcohol_genres?.genre_name },
       { manufacturer_name: data.manufacturers?.manufacturer_name },
-      data.additives_text
+      data.additives_text,
+      data.alcohol_percentage,
+      data.calories,
+      data.carbohydrates,
+      {
+        drinking_methods: data.alcohol_details?.drinking_methods,
+        cocktail_recipes: data.alcohol_details?.cocktail_recipes,
+        recommended_snacks: data.alcohol_details?.recommended_snacks,
+      }
     );
   });
 
@@ -115,7 +139,15 @@ export const getDataByGenres: (
       data.updated_at,
       { genre_name: data.alcohol_genres?.genre_name },
       { manufacturer_name: data.manufacturers?.manufacturer_name },
-      data.additives_text
+      data.additives_text,
+      data.alcohol_percentage,
+      data.calories,
+      data.carbohydrates,
+      {
+        drinking_methods: data.alcohol_details?.drinking_methods,
+        cocktail_recipes: data.alcohol_details?.cocktail_recipes,
+        recommended_snacks: data.alcohol_details?.recommended_snacks,
+      }
     );
   });
   return alcohols;

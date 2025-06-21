@@ -21,17 +21,28 @@ beforeEach(() => {
 });
 
 describe("AdditivesSearch", () => {
-  it("添加物選択ドロップダウンが表示されている", async () => {
+  it("詳細フィルターボタンが表示されている", async () => {
     render(<App />);
+    expect(
+      await screen.findByTestId("detail_filter_button")
+    ).toBeInTheDocument();
+  });
+
+  it("添加物選択ドロップダウンが表示されている", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.click(await screen.findByTestId("detail_filter_button"));
     expect(await screen.findByTestId("select_additives")).toBeInTheDocument();
   });
 
   it("添加物検索ボックスが表示されている", async () => {
+    const user = userEvent.setup();
     render(<App />);
+    await user.click(await screen.findByTestId("detail_filter_button"));
     expect(await screen.findByTestId("additives_word")).toBeInTheDocument();
   });
 
-  it("添加物あり/なし/指定しないラジオボタンが表示されている", async () => {
+  it("添加物あり/なし/すべてラジオボタンが表示されている", async () => {
     render(<App />);
     expect(await screen.findByTestId("have_additives")).toBeInTheDocument();
     expect(await screen.findByTestId("not_have_additives")).toBeInTheDocument();
@@ -72,6 +83,7 @@ describe("AdditivesSearch", () => {
 
     const user = userEvent.setup();
     render(<App />);
+    await user.click(await screen.findByTestId("detail_filter_button"));
     await user.selectOptions(
       await screen.findByTestId("select_additives"),
       "甘味料"
@@ -120,6 +132,7 @@ describe("AdditivesSearch", () => {
 
     const user = userEvent.setup();
     render(<App />);
+    await user.click(await screen.findByTestId("detail_filter_button"));
     await user.type(await screen.findByTestId("additives_word"), "色素");
     await user.click(await screen.findByTestId("search_button"));
     // ちょっと待つ
@@ -159,6 +172,7 @@ describe("AdditivesSearch", () => {
 
     const user = userEvent.setup();
     render(<App />);
+    await user.click(await screen.findByTestId("detail_filter_button"));
     await user.click(await screen.findByTestId("have_additives"));
     await user.click(await screen.findByTestId("search_button"));
     // ちょっと待つ
@@ -229,6 +243,7 @@ describe("AdditivesSearch", () => {
     (searchData as jest.Mock).mockResolvedValue(mockDataNo);
     const user = userEvent.setup();
     render(<App />);
+    await user.click(await screen.findByTestId("detail_filter_button"));
     await user.selectOptions(
       await screen.findByTestId("select_additives"),
       "発色剤"
@@ -236,6 +251,6 @@ describe("AdditivesSearch", () => {
     await user.click(await screen.findByTestId("search_button"));
     // ちょっと待つ
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    expect(await screen.findByText("検索結果ないよ")).toBeInTheDocument();
+    expect(await screen.findByText("検索結果がありません")).toBeInTheDocument();
   });
 });

@@ -32,7 +32,9 @@ describe("AlcoholsSearch", () => {
   });
 
   it("メーカー選択ボックスが表示されている", async () => {
+    const user = userEvent.setup();
     render(<App />);
+    await user.click(await screen.findByTestId("detail_filter_button"));
     expect(await screen.findByTestId("maker")).toBeInTheDocument();
   });
 
@@ -177,6 +179,7 @@ describe("AlcoholsSearch", () => {
     (searchData as jest.Mock).mockResolvedValue(mockDataByMakers);
     render(<App />);
     const user = userEvent.setup();
+    await user.click(await screen.findByTestId("detail_filter_button"));
     const makerSelect = await screen.findByTestId("maker");
 
     // メーカーを選択
@@ -224,6 +227,6 @@ describe("AlcoholsSearch", () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // 検索結果がないことを確認
-    expect(await screen.findByText("検索結果ないよ")).toBeInTheDocument();
+    expect(await screen.findByText("検索結果がありません")).toBeInTheDocument();
   });
 });
