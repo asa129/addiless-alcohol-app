@@ -5,7 +5,7 @@ async function collectData() {
   // Launch the browser and open a new blank page
   const browser = await puppeteer.launch({
     headless: false, // ブラウザを表示して動作確認
-    devtools: true, // 開発者ツールを開く
+    devtools: false, // 開発者ツールを開く
   });
   const page = await browser.newPage();
 
