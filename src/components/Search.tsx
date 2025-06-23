@@ -61,6 +61,7 @@ export const Search = (props: {
         </div>
         <div className="p-8 pt-0 flex flex-col items-center">
           <form
+            id="additives-search-form"
             onSubmit={handleSubmit(onAdditivesSubmit)}
             className="w-full space-y-6"
           >
@@ -247,6 +248,15 @@ export const Search = (props: {
                 </select>
               </div>
               <div className="flex justify-end pt-4">
+                <button
+                  type="submit"
+                  form="additives-search-form"
+                  data-testid="search_buttond"
+                  className="bg-gradient-to-r from-brand-blue to-brand-teal text-white rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 jp-text text-lg font-semibold h-12 shadow-lg hover:shadow-xl flex items-center justify-center px-6 mx-3"
+                >
+                  <CiSearch className="mr-3 h-5 w-5" />
+                  検索する
+                </button>
                 <button
                   onClick={handleReset}
                   className="border border-brand-teal text-brand-teal-dark hover:bg-brand-teal-light/20 rounded-xl transition-all duration-300 ease-in-out jp-text text-base font-semibold h-12 shadow-lg hover:shadow-xl flex items-center justify-center px-6"
