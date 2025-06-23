@@ -142,14 +142,20 @@ export const Modal = (props: {
                     </p>
                     <div className="text-brand-navy-dark jp-text text-sm sm:text-base font-medium">
                       {selectedData.alcohol_details?.cocktail_recipes ? (
-                        <a
-                          href={`${selectedData.alcohol_details?.cocktail_recipes}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-brand-blue hover:text-brand-blue-dark underline"
-                        >
-                          {selectedData.alcohol_details?.cocktail_recipes}
-                        </a>
+                        selectedData.alcohol_details.cocktail_recipes.includes(
+                          "http"
+                        ) ? (
+                          <a
+                            href={selectedData.alcohol_details.cocktail_recipes}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-brand-blue hover:text-brand-blue-dark underline"
+                          >
+                            {selectedData.alcohol_details.cocktail_recipes}
+                          </a>
+                        ) : (
+                          selectedData.alcohol_details.cocktail_recipes
+                        )
                       ) : (
                         "情報なし"
                       )}

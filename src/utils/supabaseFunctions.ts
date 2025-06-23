@@ -152,3 +152,38 @@ export const getDataByGenres: (
   });
   return alcohols;
 };
+
+export const insertAlcoholData = async (data: Partial<Alcohols>[]) => {
+  console.log(data);
+  const { data: insertData, error } = await supabase
+    .from("alcohols")
+    .insert(data)
+    .select();
+
+  if (error) {
+    throw new Error(`Insert error: ${error.message}`);
+  }
+  return insertData;
+};
+
+export const insertAlcoholDetails = async (data: object) => {
+  const { data: detailsData, error } = await supabase
+    .from("alcohol_details")
+    .upsert(data)
+    .select("id")
+    .single();
+
+  if (error) {
+    throw new Error(`Insert error: ${error.message}`);
+  }
+
+  // 取得したIDをdetails_idに更新
+  const { error: updateError } = await supabase
+    .from("alcohols")
+    .update({ details_id: detailsData.id })
+    .eq("id", detailsData.id);
+
+  if (updateError) {
+    throw new Error(`Update error: ${updateError.message}`);
+  }
+};
