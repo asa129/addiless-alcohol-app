@@ -11,15 +11,18 @@
     "test": "jest --verbose"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.54.0",
     "@react-icons/all-files": "^4.1.0",
     "@supabase/supabase-js": "^2.49.8",
     "@types/dotenv": "^6.1.1",
     "dotenv": "^16.5.0",
     "firebase": "^11.7.3",
+    "puppeteer": "^24.10.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.4",
     "react-icons": "^5.5.0",
+    "tsx": "^4.20.3",
     "vite-plugin-env-compatible": "^2.0.1"
   },
   "devDependencies": {
