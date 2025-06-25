@@ -116,7 +116,9 @@ export const getDataByGenres: (
 ) => Promise<Partial<Alcohols>[]> = async (genreId: string[]) => {
   const { data, error } = await supabase
     .from("alcohols")
-    .select("* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)")
+    .select(
+      "* , alcohol_genres(genre_name) , manufacturers(manufacturer_name), alcohol_details(drinking_methods, cocktail_recipes, recommended_snacks)"
+    )
     .in("genre_id", genreId);
 
   if (error) {
