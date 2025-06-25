@@ -51,7 +51,7 @@ export const searchData: (
   let query = supabase
     .from("alcohols")
     .select(
-      "* , alcohol_genres(genre_name) , manufacturers(manufacturer_name)"
+      "* , alcohol_genres(genre_name) , manufacturers(manufacturer_name), alcohol_details(drinking_methods, cocktail_recipes, recommended_snacks)"
     );
 
   if (additives) {
