@@ -1,54 +1,34 @@
-# React + TypeScript + Vite
+# AddiLess
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 添加物でお酒を検索
 
-Currently, two official plugins are available:
+お酒の添加物を簡単にチェック、検索できるアプリです。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 機能概要
 
-## Expanding the ESLint configuration
+- 添加物チェック添加物の有無が一目でわかります
+- お酒の商品名、添加物あり、なしで検索可能
+- 詳細検索で添加物、添加物名称、主要な飲料メーカーで検索可能
+- 各お酒の情報では、糖質量やカロリー、原材料、おすすめレシピなど紹介
+- 各レスポンシブ対応してます
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 使用技術
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+![React](https://img.shields.io/badge/React-19.1.0-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-~5.8.3-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-6.5.3-purple)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+![Supabase](https://img.shields.io/badge/Supabase-2.49.8-3FCF8E?logo=firebase&logoColor=black)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+![Firebase](https://img.shields.io/badge/Firebase-11.7.3-FFCA28?logo=firebase&logoColor=black)
+![GitHub Actions](https://img.shields.io/badge/GitHubActions-2088FF?logo=githubactions&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=white)
+![React Testing Library](https://img.shields.io/badge/ReactTestingLibrary-E33332?logo=testinglibrary&logoColor=white)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.0-06B6D4?logo=tailwindcss&logoColor=white)
+![Claude API](https://img.shields.io/badge/ClaudeAPI-D97757?logo=claude&logoColor=white)
+![puppeteer](https://img.shields.io/badge/puppeteer-40B5A4?logo=claude&logoColor=white)
+
+## 必要環境
+
+## セットアップ
