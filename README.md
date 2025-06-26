@@ -42,20 +42,20 @@
 
 ## セットアップ
 
-### リポジトリをクローン
+### 1.リポジトリをクローン
 
 ```bash
 $ git clone https://github.com/asa129/addiless-alcohol-app
 $ cd addiless-alcohol-app
 ```
 
-### パッケージインストール
+### 2.パッケージインストール
 
 ```bash
 $ npm install
 ```
 
-### 環境変数を設定
+### 3.環境変数を設定
 
 必要な API キー
 
@@ -70,13 +70,13 @@ VITE_SUPABASE_ANON_KEY=Project API Keys anon public
 ANTHROPIC_API_KEY=your_claude_api_key
 ```
 
-### 開発サーバー起動
+### 4.開発サーバー起動
 
 ```bash
 npm run dev
 ```
 
-### ブラウザで URL にアクセス
+### 5.ブラウザで URL にアクセス
 
 ## バッチ実行
 
