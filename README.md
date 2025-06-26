@@ -16,9 +16,9 @@
 
 ![React](https://img.shields.io/badge/React-19.1.0-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-~5.8.3-3178C6?logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-6.5.3-purple)
+![Vite](https://img.shields.io/badge/Vite-6.5.3-646CFF?logo=vite&logoColor=white)
 
-![Supabase](https://img.shields.io/badge/Supabase-2.49.8-3FCF8E?logo=firebase&logoColor=black)
+![Supabase](https://img.shields.io/badge/Supabase-2.49.8-3FCF8E?logo=supabase&logoColor=black)
 
 ![Firebase](https://img.shields.io/badge/Firebase-11.7.3-FFCA28?logo=firebase&logoColor=black)
 ![GitHub Actions](https://img.shields.io/badge/GitHubActions-2088FF?logo=githubactions&logoColor=white)
