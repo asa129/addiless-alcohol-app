@@ -33,7 +33,7 @@
 ![React Testing Library](https://img.shields.io/badge/ReactTestingLibrary-E33332?logo=testinglibrary&logoColor=white)
 
 ![Claude API](https://img.shields.io/badge/ClaudeAPI-D97757?logo=claude&logoColor=white)
-![puppeteer](https://img.shields.io/badge/puppeteer-40B5A4?logo=claude&logoColor=white)
+![puppeteer](https://img.shields.io/badge/puppeteer-40B5A4?logo=puppeteer&logoColor=white)
 
 ## 必要環境
 
