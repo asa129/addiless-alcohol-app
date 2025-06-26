@@ -97,7 +97,11 @@ function App() {
         <div className="flex-grow container mx-auto px-4 py-8 md:py-12">
           <Search {...searchProps} />
           <CategoryFilter handleChange={handleChange} genreId={genreId} />
-          <Card data={data} handleOpenModal={handleOpenModal} />
+          <Card
+            data={data}
+            handleOpenModal={handleOpenModal}
+            cardListRef={searchForm.cardListRef}
+          />
         </div>
         <Footer />
         {isModalOpen && (

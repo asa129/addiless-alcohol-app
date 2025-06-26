@@ -8,8 +8,9 @@ import { GiMedicines } from "react-icons/gi";
 export const Card = (props: {
   data: Partial<Alcohols>[] | undefined;
   handleOpenModal: (data: Partial<Alcohols>) => void;
+  cardListRef: React.RefObject<HTMLDivElement | null>;
 }) => {
-  const { data, handleOpenModal } = props;
+  const { data, handleOpenModal, cardListRef } = props;
   return (
     <>
       {data && data.length === 0 ? (
@@ -23,7 +24,10 @@ export const Card = (props: {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        <div
+          ref={cardListRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
+        >
           {data &&
             data.map((data) => {
               return (

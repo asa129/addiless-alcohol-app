@@ -18,6 +18,7 @@ beforeEach(() => {
   (getAllData as jest.Mock).mockClear();
   (getDataByGenres as jest.Mock).mockClear();
   (searchData as jest.Mock).mockClear();
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
 });
 
 describe("AlcoholsSearch", () => {
