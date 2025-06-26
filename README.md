@@ -16,6 +16,7 @@
 
 ![React](https://img.shields.io/badge/React-19.1.0-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-~5.8.3-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.0-06B6D4?logo=tailwindcss&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-6.5.3-646CFF?logo=vite&logoColor=white)
 
 ![Supabase](https://img.shields.io/badge/Supabase-2.49.8-3FCF8E?logo=supabase&logoColor=white)
@@ -25,10 +26,34 @@
 ![Jest](https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=white)
 ![React Testing Library](https://img.shields.io/badge/ReactTestingLibrary-E33332?logo=testinglibrary&logoColor=white)
 
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.0-06B6D4?logo=tailwindcss&logoColor=white)
 ![Claude API](https://img.shields.io/badge/ClaudeAPI-D97757?logo=claude&logoColor=white)
 ![puppeteer](https://img.shields.io/badge/puppeteer-40B5A4?logo=claude&logoColor=white)
 
 ## 必要環境
 
+- Node.js v20.19.0 以上
+- npm
+
 ## セットアップ
+
+```
+// リポジトリをクローン
+$ git clone https://github.com/asa129/addiless-alcohol-app
+
+// パッケージインストール
+$ npm install
+
+// 環境変数を設定
+VITE_SUPABASE_URL=Project URL
+VITE_SUPABASE_URLITE_SUPABASE_ANON_KEY=Project API Keys anon public
+ANTHROPIC_API_KEY=your_api_key
+
+// 開発サーバー起動
+npm run dev
+```
+
+## バッチ実行
+
+```
+$ npx tsx ./batch/autoInsertData.ts
+```
