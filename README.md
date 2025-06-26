@@ -6,11 +6,17 @@
 
 ## 機能概要
 
-- 添加物チェック添加物の有無が一目でわかります
-- お酒の商品名、添加物あり、なしで検索可能
-- 詳細検索で添加物、添加物名称、主要な飲料メーカーで検索可能
-- 各お酒の情報では、糖質量やカロリー、原材料、おすすめレシピなど紹介
-- 各レスポンシブ対応してます
+- **添加物チェック**：添加物の有無が一目でわかります
+- **商品名・添加物有無で検索**：お酒の商品名、添加物有無で検索可能
+- **詳細検索**：添加物、添加物名称、主要な飲料メーカーで検索可能
+- **詳細情報**：アルコールパーセンテージ、糖質量、カロリー、原材料、おすすめレシピなど紹介
+- **レスポンシブ対応**：スマートフォンからＰＣまでどの端末でも利用可能
+- **自動データ登録**：バッチコマンド実行で、メーカーサイトから情報を収集、登録
+
+## Demo
+
+![メイン画面](./docs/screenshot-main.png)
+![検索画面](./docs/screenshot-search.png)
 
 ## 使用技術
 
@@ -36,24 +42,47 @@
 
 ## セットアップ
 
-```
-// リポジトリをクローン
+### リポジトリをクローン
+
+```bash
 $ git clone https://github.com/asa129/addiless-alcohol-app
+$ cd addiless-alcohol-app
+```
 
-// パッケージインストール
+### パッケージインストール
+
+```bash
 $ npm install
+```
 
-// 環境変数を設定
-VITE_SUPABASE_URL=Project URL
-VITE_SUPABASE_URLITE_SUPABASE_ANON_KEY=Project API Keys anon public
-ANTHROPIC_API_KEY=your_api_key
+### 環境変数を設定
 
-// 開発サーバー起動
+必要な API キー
+
+- Supabase
+- ClaudeAPI
+
+`.env.example`を`.env`に変更して、以下を設定してください
+
+```bash
+VITE_SUPABASE_URL=Supabase Project URL
+VITE_SUPABASE_ANON_KEY=Project API Keys anon public
+ANTHROPIC_API_KEY=your_claude_api_key
+```
+
+### 開発サーバー起動
+
+```bash
 npm run dev
 ```
 
+### ブラウザで URL にアクセス
+
 ## バッチ実行
 
-```
+以下のコマンドを実行後、puppeteer を使用して、メーカーサイトから情報を収集、
+AI がおすすめの飲み方、カクテルレシピ、ペアリング情報を生成して Supabase に自動登録してくれます。
+
+```bash
 $ npx tsx ./batch/autoInsertData.ts
 ```
