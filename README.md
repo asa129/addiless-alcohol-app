@@ -82,6 +82,7 @@ npm run dev
 
 以下のコマンドを実行後、puppeteer を使用して、メーカーサイトから情報を収集、
 AI がおすすめの飲み方、カクテルレシピ、ペアリング情報を生成して Supabase に自動登録してくれます。
+DBプロジェクト作成後、バッチ実行することで100データほど作成可能です。
 
 ```bash
 $ npx tsx ./batch/autoInsertData.ts
