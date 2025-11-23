@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alcohol-app
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+
+  batch:
+    build:
+      context: .
+      dockerfile: batch/Dockerfile
+    container_name: alcohol-batch
+    env_file:
+      - .env
+    profiles:
+      - tools
